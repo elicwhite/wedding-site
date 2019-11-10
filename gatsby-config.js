@@ -1,11 +1,12 @@
 module.exports = {
   pathPrefix: "/wedding-site",
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `Holly and Eli`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
   },
   plugins: [
+    "gatsby-plugin-layout",
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,

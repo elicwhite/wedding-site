@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link } from "gatsby"
 
-import NavBar from "../components/navbar";
-import Layout from "../components/layout"
+import NavBar from "../components/navbar"
 import Image from "../components/image"
 import SEO from "../components/seo"
 
@@ -44,9 +43,8 @@ const RSVPPage = () => {
   }
 
   return (
-    <Layout>
+    <>
       <SEO title="Home" />
-      <NavBar />
       <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
         <Image />
 
@@ -57,7 +55,7 @@ const RSVPPage = () => {
           <input type="submit" value="Submit" />
         </form>
       </div>
-    </Layout>
+    </>
   )
 }
 
