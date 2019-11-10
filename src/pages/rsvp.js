@@ -1,46 +1,46 @@
-import React, { useEffect, useState } from "react"
-import { Link } from "gatsby"
+import React, { useEffect, useState } from 'react';
+import { Link } from 'gatsby';
 
-import NavBar from "../components/navbar"
-import Image from "../components/image"
-import SEO from "../components/seo"
+import NavBar from '../components/navbar';
+import Image from '../components/image';
+import SEO from '../components/seo';
 
-import { withPrivateRoute } from "../components/privateRoute"
+import { withPrivateRoute } from '../components/privateRoute';
 
 const URL =
-  "https://script.google.com/macros/s/AKfycbw40Vlc4DUTT-s8ZsKFK9zThsqAGWocI_3I0MOChYuHHx4s8dO6/exec"
+  'https://script.google.com/macros/s/AKfycbw40Vlc4DUTT-s8ZsKFK9zThsqAGWocI_3I0MOChYuHHx4s8dO6/exec';
 
 function useInput() {
-  const [value, setValue] = useState("")
+  const [value, setValue] = useState('');
   const input = (
     <input type="text" onChange={e => setValue(e.target.value)} value={value} />
-  )
+  );
 
-  return [value, input]
+  return [value, input];
 }
 
 const RSVPPage = () => {
-  const [name, nameInput] = useInput()
+  const [name, nameInput] = useInput();
 
   const handleSubmit = event => {
-    console.log("submit")
-    event.preventDefault()
+    console.log('submit');
+    event.preventDefault();
 
-    const formData = {}
-    formData.name = name
-    formData.message = "test messages"
-    formData.email = "foo@blah.com"
-    formData.color = "green"
+    const formData = {};
+    formData.name = name;
+    formData.message = 'test messages';
+    formData.email = 'foo@blah.com';
+    formData.color = 'green';
 
     fetch(URL, {
-      method: "POST",
-      mode: "no-cors",
+      method: 'POST',
+      mode: 'no-cors',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
-    })
-  }
+    });
+  };
 
   return (
     <>
@@ -56,7 +56,7 @@ const RSVPPage = () => {
         </form>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default withPrivateRoute(RSVPPage)
+export default withPrivateRoute(RSVPPage);

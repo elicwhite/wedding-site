@@ -1,9 +1,9 @@
-import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import { TransitionProvider, TransitionViews } from "gatsby-plugin-transitions"
-import Header from "../components/header"
-import NavBar from "../components/navbar"
-import "./layout.css"
+import React from 'react';
+import { useStaticQuery, graphql } from 'gatsby';
+import { TransitionProvider, TransitionViews } from 'gatsby-plugin-transitions';
+import Header from '../components/header';
+import NavBar from '../components/navbar';
+import './layout.css';
 
 const Layout = ({ location, children }) => {
   const data = useStaticQuery(graphql`
@@ -14,7 +14,7 @@ const Layout = ({ location, children }) => {
         }
       }
     }
-  `)
+  `);
 
   return (
     <>
@@ -37,7 +37,7 @@ const Layout = ({ location, children }) => {
               duration: 500,
             },
             onRest: () => {
-              console.log("Hello, World!")
+              console.log('Hello, World!');
             },
           }}
           usual={{
@@ -54,7 +54,7 @@ const Layout = ({ location, children }) => {
         </TransitionProvider>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

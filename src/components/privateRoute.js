@@ -1,19 +1,19 @@
-import React, { useState, useEffect, Component, isAuthenticated } from "react"
-import { navigate } from "gatsby"
-import { isLoggedIn } from "../services/auth"
+import React, { useState, useEffect, Component, isAuthenticated } from 'react';
+import { navigate } from 'gatsby';
+import { isLoggedIn } from '../services/auth';
 
 export function withPrivateRoute(Component) {
   return function MyComponent(props) {
-    const [isAuthenticated, setAuthenticated] = useState(false)
-    const isLoggedInValue = isLoggedIn()
+    const [isAuthenticated, setAuthenticated] = useState(false);
+    const isLoggedInValue = isLoggedIn();
 
     useEffect(() => {
-      setAuthenticated(isLoggedInValue)
+      setAuthenticated(isLoggedInValue);
       if (!isLoggedInValue) {
-        navigate("/login")
+        navigate('/login');
       }
-    }, [isLoggedInValue])
+    }, [isLoggedInValue]);
 
-    return isAuthenticated ? <Component {...props} /> : null
-  }
+    return isAuthenticated ? <Component {...props} /> : null;
+  };
 }

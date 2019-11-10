@@ -1,6 +1,6 @@
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
-import React from "react"
+import { Link } from 'gatsby';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const NavBar = () => (
   <div>
@@ -8,6 +8,6 @@ const NavBar = () => (
     <Link to="/rsvp">RSVP</Link>
     <Link to="/login">Login</Link>
   </div>
-)
+);
 
-export default NavBar
+export default NavBar;
