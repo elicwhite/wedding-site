@@ -36,9 +36,6 @@ const Layout = ({ location, children }) => {
             config: {
               duration: 500,
             },
-            onRest: () => {
-              console.log('Hello, World!');
-            },
           }}
           usual={{
             opacity: 1,

@@ -23,7 +23,6 @@ const RSVPPage = () => {
   const [name, nameInput] = useInput();
 
   const handleSubmit = event => {
-    console.log('submit');
     event.preventDefault();
 
     const formData = {};
