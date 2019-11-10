@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{RXBc:function(e,t,a){"use strict";a.r(t);var n=a("q1tI"),r=a.n(n),i=(a("Wbzz"),a("RMg3"),a("tBDR"),a("vrFN")),c=a("M662");t.default=Object(c.a)((function(){return r.a.createElement(r.a.Fragment,null,r.a.createElement(i.a,{title:"Home"}),r.a.createElement("div",{style:{maxWidth:"300px",marginBottom:"1.45rem"}},"We are getting married!"))}))}}]);
+//# sourceMappingURL=component---src-pages-index-js-43d3413f33f410c94b19.js.map
