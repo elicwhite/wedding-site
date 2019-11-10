@@ -4,8 +4,8 @@ import React from "react"
 
 const NavBar = () => (
   <div>
-    RSVP
-    About Us
+    <Link to="/">Home</Link>
+    <Link to="/rsvp">RSVP</Link>
   </div>
 )
 

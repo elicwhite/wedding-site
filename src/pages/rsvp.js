@@ -20,17 +20,45 @@ function useInput() {
   return [value, input]
 }
 
-const IndexPage = () => {
+const RSVPPage = () => {
+  const [name, nameInput] = useInput()
+
+  const handleSubmit = event => {
+    console.log("submit")
+    event.preventDefault()
+
+    const formData = {}
+    formData.name = name
+    formData.message = "test messages"
+    formData.email = "foo@blah.com"
+    formData.color = "green"
+
+    fetch(URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+  }
+
   return (
     <Layout>
       <SEO title="Home" />
       <NavBar />
       <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
+        <Image />
+
+        <h3>Name</h3>
+        <form onSubmit={handleSubmit}>
+          <div>{nameInput}</div>
+
+          <input type="submit" value="Submit" />
+        </form>
       </div>
-
-
     </Layout>
   )
 }
 
-export default withPrivateRoute(IndexPage)
+export default withPrivateRoute(RSVPPage)
