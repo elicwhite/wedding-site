@@ -9,7 +9,7 @@ function useInput() {
   const [value, setValue] = useState("")
   const input = (
     <input
-      type="password"
+      type="text"
       onChange={e => setValue(e.target.value)}
       value={value}
     />
