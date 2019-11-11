@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'gatsby';
+import React, { useState } from 'react';
 
-import NavBar from '../components/navbar';
-import Image from '../components/image';
 import SEO from '../components/seo';
 
 import { withPrivateRoute } from '../components/privateRoute';
@@ -45,8 +42,6 @@ const RSVPPage = () => {
     <>
       <SEO title="Home" />
       <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-        <Image />
-
         <h3>Name</h3>
         <form onSubmit={handleSubmit}>
           <div>{nameInput}</div>

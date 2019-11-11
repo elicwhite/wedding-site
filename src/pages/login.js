@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link, navigate } from 'gatsby';
-import {SwitchTransition, CSSTransition} from 'react-transition-group';
-import "./login.css";
+import { navigate } from 'gatsby';
+import { SwitchTransition, CSSTransition } from 'react-transition-group';
+import './login.css';
 
 import { handleLogin } from '../services/auth';
 import SEO from '../components/seo';
@@ -36,13 +36,16 @@ const LoginPage = () => {
     <>
       <SEO title="Login" />
       <SwitchTransition>
-        <CSSTransition key={enteredSuccessfully ? "success" : "password"}
-          addEndListener={(node, done) => node.addEventListener("transitionend", done, false)}
-          classNames='fade'>
+        <CSSTransition
+          key={enteredSuccessfully ? 'success' : 'password'}
+          addEndListener={(node, done) =>
+            node.addEventListener('transitionend', done, false)
+          }
+          classNames="fade"
+        >
           {enteredSuccessfully ? <span>success!</span> : passwordInput}
         </CSSTransition>
       </SwitchTransition>
-
     </>
   );
 };
