@@ -32,7 +32,7 @@ const GalleryPage = () => {
           node {
             sourceInstanceName
             childImageSharp {
-              preview: fluid(maxWidth: 50, quality: 50) {
+              preview: fluid(maxWidth: 300, quality: 100) {
                 ...GatsbyImageSharpFluid
               }
               fullscreen: fluid(maxWidth: 1000, quality: 100) {
@@ -74,8 +74,8 @@ const GalleryPage = () => {
   }, []);
 
   const closeLightbox = () => {
-    setCurrentImage(0);
     setViewerIsOpen(false);
+    setCurrentImage(0);
   };
 
   return (
