@@ -4,6 +4,7 @@ import { TransitionProvider, TransitionViews } from 'gatsby-plugin-transitions';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import Header from '../components/header';
 import NavBar from '../components/navbar';
+import { isLoggedIn } from '../services/auth';
 import './layout.css';
 
 const Layout = ({ location, children }) => {
@@ -17,7 +18,7 @@ const Layout = ({ location, children }) => {
     }
   `);
 
-  const isLogin = location.pathname.includes('login');
+  const isLogin = !isLoggedIn() || location.pathname.includes('login');
 
   const transitionProvider = (
     <TransitionProvider
