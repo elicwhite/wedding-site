@@ -1,14 +1,13 @@
-.fade-enter {
-  opacity: 0;
+.password-field {
+  background-color: rgba(255, 255, 255, 0.7);
+  border: 0;
+  border-radius: 10px;
+  font-family: sans-serif;
+  padding: 10px;
+  text-align: center;
+  color: #333;
 }
-.fade-enter-active {
-  opacity: 1;
-  transition: opacity 500ms;
-}
-.fade-exit {
-  opacity: 1;
-}
-.fade-exit-active {
-  opacity: 0;
-  transition: opacity 500ms;
+
+.password-field::placeholder {
+  color: black;
 }
