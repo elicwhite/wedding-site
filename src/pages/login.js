@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { navigate, useStaticQuery } from 'gatsby';
+import { navigate, useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import './login.css';
