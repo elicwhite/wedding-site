@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import {useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 import Carousel, { Modal, ModalGateway } from 'react-images';
 
@@ -11,7 +11,9 @@ import { withPrivateRoute } from '../components/privateRoute';
 function GalleryImage({ index, left, top, key, photo, onClick }) {
   return (
     <div
-      onClick={(e) => {onClick(e, {index})}}
+      onClick={e => {
+        onClick(e, { index });
+      }}
       key={key}
     >
       <Img
@@ -25,11 +27,15 @@ function GalleryImage({ index, left, top, key, photo, onClick }) {
 const GalleryPage = () => {
   const data2 = useStaticQuery(graphql`
     query {
-      allImages: allFile(filter: {sourceInstanceName: {eq: "gallery"}}) {
+      allImages: allFile(filter: { sourceInstanceName: { eq: "gallery" } }) {
         edges {
           node {
+            sourceInstanceName
             childImageSharp {
-              fluid(maxWidth: 1000) {
+              preview: fluid(maxWidth: 50, quality: 50) {
+                ...GatsbyImageSharpFluid
+              }
+              fullscreen: fluid(maxWidth: 1000, quality: 100) {
                 ...GatsbyImageSharpFluid
               }
             }
@@ -39,14 +45,24 @@ const GalleryPage = () => {
     }
   `);
 
-  const photos = data2.allImages.edges.map(edge => {
-    const image= edge.node.childImageSharp.fluid;
+  const previewPhotos = data2.allImages.edges.map(edge => {
+    const image = edge.node.childImageSharp.preview;
 
     return {
       ...image,
       width: image.aspectRatio,
-      height :1,
-    }
+      height: 1,
+    };
+  });
+
+  const fullscreenPhotos = data2.allImages.edges.map(edge => {
+    const image = edge.node.childImageSharp.fullscreen;
+
+    return {
+      ...image,
+      width: image.aspectRatio,
+      height: 1,
+    };
   });
 
   const [currentImage, setCurrentImage] = useState(0);
@@ -65,11 +81,15 @@ const GalleryPage = () => {
   return (
     <>
       <SEO title="Home" />
-      <Gallery photos={photos} renderImage={GalleryImage} onClick={openLightbox} />
+      <Gallery
+        photos={previewPhotos}
+        renderImage={GalleryImage}
+        onClick={openLightbox}
+      />
       <ModalGateway>
         {viewerIsOpen ? (
           <Modal onClose={closeLightbox}>
-             <Carousel views={photos} currentIndex={currentImage} />
+            <Carousel views={fullscreenPhotos} currentIndex={currentImage} />
           </Modal>
         ) : null}
       </ModalGateway>
