@@ -23,27 +23,6 @@ function useInput() {
   return [value, input];
 }
 
-const Image = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      placeholderImage: file(relativePath: { eq: "proposal.jpg" }) {
-        childImageSharp {
-          fluid(maxWidth: 1500) {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-    }
-  `);
-
-  return (
-    <Img
-      fluid={data.placeholderImage.childImageSharp.fluid}
-      style={{ height: '100vh' }}
-    />
-  );
-};
-
 const LoginPage = () => {
   const [enteredSuccessfully, setEnteredSuccessfully] = useState(false);
   const [password, passwordInput] = useInput();
@@ -63,43 +42,44 @@ const LoginPage = () => {
 
   return (
     <>
-      <div style={{ position: 'relative' }}>
+      <div style={{ position: 'relative', textAlign: 'center' }}>
         <SEO title="Login" />
-        <Image />
         <div
           style={{
-            left: '50%',
-            margin: 'auto',
-            position: 'absolute',
-            top: '70vh',
-            transform: 'translateX(-50%)',
-            fontSize: 30,
+            fontFamily: 'MrsEavesAllPetiteCaps',
+            fontSize: '35px',
+            fontWeight: 400,
+            lineHeight: 1.4,
+            letterSpacing: '1px',
+            marginBottom: '20px',
           }}
         >
-          <SwitchTransition>
-            <CSSTransition
-              key={enteredSuccessfully ? 'success' : 'password'}
-              addEndListener={(node, done) =>
-                node.addEventListener('transitionend', done, false)
-              }
-              classNames="fade"
-            >
-              {enteredSuccessfully ? (
-                <span
-                  style={{
-                    fontSize: 60,
-                  }}
-                  role="img"
-                  aria-label="success"
-                >
-                  😍
-                </span>
-              ) : (
-                passwordInput
-              )}
-            </CSSTransition>
-          </SwitchTransition>
+          Please enter the password from the Save the Date
         </div>
+
+        <SwitchTransition>
+          <CSSTransition
+            key={enteredSuccessfully ? 'success' : 'password'}
+            addEndListener={(node, done) =>
+              node.addEventListener('transitionend', done, false)
+            }
+            classNames="fade"
+          >
+            {enteredSuccessfully ? (
+              <span
+                style={{
+                  fontSize: 60,
+                }}
+                role="img"
+                aria-label="success"
+              >
+                😍
+              </span>
+            ) : (
+              passwordInput
+            )}
+          </CSSTransition>
+        </SwitchTransition>
       </div>
     </>
   );

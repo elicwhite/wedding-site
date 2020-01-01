@@ -1,11 +1,13 @@
 .password-field {
-  background-color: rgba(255, 255, 255, 0.7);
-  border: 0;
-  border-radius: 10px;
-  font-family: sans-serif;
+  font-family: MrsEavesRoman;
+  /* background-color: rgba(255, 255, 255, 0.7); */
+  /* border: 0; */
+  /* border-radius: 10px; */
+  /* font-family: sans-serif; */
   padding: 10px;
   text-align: center;
-  color: #333;
+  /* color: #333; */
+  font-size: 35px;
 }
 
 .password-field::placeholder {

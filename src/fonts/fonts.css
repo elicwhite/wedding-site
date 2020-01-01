@@ -7,3 +7,8 @@
     font-family: "MrsEavesAllPetiteCaps";
     src: url("MrsEavesAllPetiteCaps-Regular.ttf") format("truetype");
 }
+
+@font-face {
+    font-family: "MrsEavesRoman";
+    src: url("MrsEavesRoman-Regular.ttf") format("truetype");
+}
