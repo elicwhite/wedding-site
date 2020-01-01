@@ -27,6 +27,7 @@ const NavBar = () => (
         listStyleType: 'none',
         display: 'flex',
         margin: 0,
+        justifyContent: 'center',
       }}
     >
       <li style={styles.listItem}>
