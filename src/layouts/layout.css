@@ -5,8 +5,8 @@ html {
 }
 body {
   margin: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'MrsEavesRoman';
+  font-size: 18px;
 }
 article,
 aside,

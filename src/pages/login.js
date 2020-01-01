@@ -11,7 +11,7 @@ function useInput() {
   const [value, setValue] = useState('');
   const input = (
     <input
-      autocapitalize="off"
+      autoCapitalize="off"
       className="password-field"
       type="text"
       onChange={e => setValue(e.target.value)}

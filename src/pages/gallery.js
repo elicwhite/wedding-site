@@ -8,6 +8,8 @@ import Gallery from 'react-photo-gallery';
 
 import { withPrivateRoute } from '../components/privateRoute';
 
+const MARGIN = 4;
+
 function GalleryImage({ index, left, top, key, photo, onClick }) {
   return (
     <div
@@ -18,7 +20,7 @@ function GalleryImage({ index, left, top, key, photo, onClick }) {
     >
       <Img
         fluid={photo}
-        style={{ margin: 2, height: photo.height, width: photo.width }}
+        style={{ margin: MARGIN, height: photo.height, width: photo.width }}
       />
     </div>
   );
@@ -85,6 +87,7 @@ const GalleryPage = () => {
         photos={previewPhotos}
         renderImage={GalleryImage}
         onClick={openLightbox}
+        margin={MARGIN}
       />
       <ModalGateway>
         {viewerIsOpen ? (

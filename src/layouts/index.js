@@ -1,23 +1,13 @@
 import React from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
 import { TransitionProvider, TransitionViews } from 'gatsby-plugin-transitions';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import Header from '../components/header';
 import NavBar from '../components/navbar';
 import { isLoggedIn } from '../services/auth';
+import '../fonts/fonts.css';
 import './layout.css';
 
 const Layout = ({ location, children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `);
-
   const isLogin = !isLoggedIn() || location.pathname.includes('login');
 
   const transitionProvider = (
@@ -57,7 +47,8 @@ const Layout = ({ location, children }) => {
             transitionProvider
           ) : (
             <>
-              <Header siteTitle={data.site.siteMetadata.title} />
+              <Header />
+              <NavBar />
               <div
                 style={{
                   margin: `0 auto`,
@@ -66,7 +57,6 @@ const Layout = ({ location, children }) => {
                   paddingTop: 0,
                 }}
               >
-                <NavBar />
                 {transitionProvider}
               </div>
             </>

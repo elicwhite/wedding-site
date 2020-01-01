@@ -1,32 +1,25 @@
-import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      background: `rebeccapurple`,
+      padding: '30px 0',
       marginBottom: `1.45rem`,
+      textAlign: 'center',
+      lineHeight: '1.4',
     }}
   >
     <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
+      style={
+        {
+          // maxWidth: 960,
+        }
+      }
     >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
+      <h1 style={{ ...styles.names, marginBottom: '34px' }}>Holly</h1>
+      <div style={styles.and}>and</div>
+      <h1 style={{ ...styles.names, marginTop: '6px' }}>Eli</h1>
     </div>
   </header>
 );
@@ -37,6 +30,22 @@ Header.propTypes = {
 
 Header.defaultProps = {
   siteTitle: ``,
+};
+
+const styles = {
+  names: {
+    margin: 0,
+    fontFamily: 'Faustine',
+    fontSize: '124px',
+    fontWeight: 400,
+    lineHeight: 1,
+  },
+  and: {
+    lineHeight: 1,
+    fontFamily: 'Faustine',
+    fontSize: '57px',
+    fontWeight: 400,
+  },
 };
 
 export default Header;
