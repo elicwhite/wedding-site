@@ -48,7 +48,7 @@ function MobileNavBar() {
   const inputRef = useRef();
 
   return (
-    <div id="mobile-nav">
+    <div id="mobile-nav" data-test="foo">
       <input ref={inputRef} type="checkbox" />
 
       <span></span>
