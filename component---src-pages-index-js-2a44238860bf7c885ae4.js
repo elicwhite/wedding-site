@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{RXBc:function(e,t,a){"use strict";a.r(t);var n=a("q1tI"),r=a.n(n),i=a("vrFN"),c=a("M662");t.default=Object(c.a)((function(){return r.a.createElement(r.a.Fragment,null,r.a.createElement(i.a,{title:"Home"}),r.a.createElement("div",{style:{maxWidth:"300px",marginBottom:"1.45rem"}},"We are getting married!"))}))}}]);
-//# sourceMappingURL=component---src-pages-index-js-2a44238860bf7c885ae4.js.map
