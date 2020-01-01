@@ -45,12 +45,8 @@ const LoginPage = () => {
       <div style={{ position: 'relative', textAlign: 'center' }}>
         <SEO title="Login" />
         <div
+          className="caps-subheader"
           style={{
-            fontFamily: 'MrsEavesAllPetiteCaps',
-            fontSize: '35px',
-            fontWeight: 400,
-            lineHeight: 1.4,
-            letterSpacing: '1px',
             marginBottom: '20px',
           }}
         >

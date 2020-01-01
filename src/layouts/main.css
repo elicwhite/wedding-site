@@ -1,0 +1,22 @@
+:root {
+  --font-size-multiplier: 1;
+}
+
+@media only screen and (max-width: 600px) {
+  :root {
+    --font-size-multiplier: 0.7;
+  }
+}
+
+body {
+  font-family: 'MrsEavesRoman';
+  font-size: calc(18px * var(--font-size-multiplier));
+}
+
+.caps-subheader {
+  font-family: 'MrsEavesAllPetiteCaps';
+  font-size: calc(35px * var(--font-size-multiplier));
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 1px;
+}

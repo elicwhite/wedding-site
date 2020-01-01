@@ -6,6 +6,7 @@ import NavBar from '../components/navbar';
 import { isLoggedIn } from '../services/auth';
 import '../fonts/fonts.css';
 import './layout.css';
+import './main.css';
 
 const Layout = ({ location, children }) => {
   const isLogin = !isLoggedIn() || location.pathname.includes('login');

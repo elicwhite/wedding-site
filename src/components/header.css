@@ -1,0 +1,23 @@
+.names,
+.and {
+  font-weight: 400;
+  line-height: 1;
+  font-family: 'Faustine';
+}
+
+.names {
+  font-size: calc(124px * var(--font-size-multiplier));
+  margin: 0;
+}
+
+.and {
+  font-size: calc(57px * var(--font-size-multiplier));
+}
+
+.names.first {
+  margin-bottom: calc(34px * var(--font-size-multiplier));
+}
+
+.names.second {
+  margin-top: calc(6px * var(--font-size-multiplier));
+}

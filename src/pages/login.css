@@ -7,7 +7,7 @@
   padding: 10px;
   text-align: center;
   /* color: #333; */
-  font-size: 35px;
+  font-size: calc(35px * var(--font-size-multiplier));
 }
 
 .password-field::placeholder {

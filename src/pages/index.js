@@ -41,24 +41,14 @@ const IndexPage = () => {
             textAlign: 'center',
           }}
         >
-          <div
-            style={{
-              fontFamily: 'MrsEavesAllPetiteCaps',
-              fontSize: '35px',
-              fontWeight: 400,
-              lineHeight: 1.4,
-              letterSpacing: '1px',
-            }}
-          >
+          <div className="caps-subheader">
             Please join us for our wedding celebration on
           </div>
           <div
+            className="caps-subheader"
             style={{
-              fontFamily: 'MrsEavesAllPetiteCaps',
-              fontSize: '61px',
-              fontWeight: 400,
+              fontSize: 'calc(61px * var(--font-size-multiplier))',
               lineHeight: 1.4,
-              letterSpacing: '1px',
             }}
           >
             September 12th, 2020

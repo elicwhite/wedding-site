@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import './header.css';
 
 const Header = ({ siteTitle }) => (
   <header
@@ -17,9 +18,9 @@ const Header = ({ siteTitle }) => (
         }
       }
     >
-      <h1 style={{ ...styles.names, marginBottom: '34px' }}>Holly</h1>
-      <div style={styles.and}>and</div>
-      <h1 style={{ ...styles.names, marginTop: '6px' }}>Eli</h1>
+      <h1 className="names first">Holly</h1>
+      <div className="and">and</div>
+      <h1 className="names second">Eli</h1>
     </div>
   </header>
 );
@@ -30,22 +31,6 @@ Header.propTypes = {
 
 Header.defaultProps = {
   siteTitle: ``,
-};
-
-const styles = {
-  names: {
-    margin: 0,
-    fontFamily: 'Faustine',
-    fontSize: '124px',
-    fontWeight: 400,
-    lineHeight: 1,
-  },
-  and: {
-    lineHeight: 1,
-    fontFamily: 'Faustine',
-    fontSize: '57px',
-    fontWeight: 400,
-  },
 };
 
 export default Header;
