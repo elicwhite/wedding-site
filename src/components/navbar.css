@@ -20,11 +20,9 @@ https://codepen.io/erikterwan/pen/EVzeRP
 
 #mobile-nav input {
   display: block;
-  width: 40px;
-  height: 32px;
+  width: 52px;
+  height: 42px;
   position: absolute;
-  top: -7px;
-  left: -5px;
 
   cursor: pointer;
 
@@ -37,7 +35,7 @@ https://codepen.io/erikterwan/pen/EVzeRP
 /*
  * Just a quick hamburger
  */
-#mobile-nav span {
+.hamburger span {
   display: block;
   width: 33px;
   height: 4px;
@@ -55,28 +53,43 @@ https://codepen.io/erikterwan/pen/EVzeRP
     opacity 0.55s ease;
 }
 
-#mobile-nav span:first-child {
+.hamburger span:first-child {
   transform-origin: 0% 0%;
 }
 
-#mobile-nav span:nth-last-child(2) {
-  transform-origin: 0% 100%;
+.hamburger span:last-child {
+  transform-origin: 4px 6px;
+}
+
+.hamburger {
+  z-index: 1;
+  position: relative;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  padding-bottom: 5px;
+  overflow: auto;
+  opacity: 0.85;
+  transition: background-color 0.5s linear;
+}
+
+#mobile-nav input:checked ~ .hamburger {
+  background-color: transparent;
 }
 
 /*
  * Transform all the slices of hamburger
  * into a crossmark.
  */
-#mobile-nav input:checked ~ span {
+#mobile-nav input:checked ~ .hamburger span {
   opacity: 1;
   transform: rotate(45deg) translate(-2px, -1px);
-  background: #232323;
 }
 
 /*
  * But let's hide the middle one.
  */
-#mobile-nav input:checked ~ span:nth-last-child(3) {
+#mobile-nav input:checked ~ .hamburger span:nth-child(2) {
   opacity: 0;
   transform: rotate(0deg) scale(0.2, 0.2);
 }
@@ -84,8 +97,8 @@ https://codepen.io/erikterwan/pen/EVzeRP
 /*
  * Oh yeah and the last one should go the other direction
  */
-#mobile-nav input:checked ~ span:nth-last-child(2) {
-  transform: rotate(-45deg) translate(0, -1px);
+#mobile-nav input:checked ~ .hamburger span:last-child {
+  transform: rotate(-45deg) translate(0px, -1px);
 }
 
 /*

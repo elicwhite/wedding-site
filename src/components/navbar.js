@@ -51,15 +51,16 @@ function MobileNavBar() {
     <div id="mobile-nav">
       <input ref={inputRef} type="checkbox" />
 
-      <span></span>
-      <span></span>
-      <span></span>
+      <div className="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
       <ul id="mobile-nav-menu" className="menu">
         <Links
           onClick={() => {
             inputRef.current.checked = false;
-            // console.log('clicked!', inputRef.current);
           }}
         />
       </ul>

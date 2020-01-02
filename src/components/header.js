@@ -2,35 +2,25 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import './header.css';
 
-const Header = ({ siteTitle }) => (
+const Header = ({ inline }) => (
   <header
     style={{
-      padding: '30px 0',
+      paddingBottom: '30px',
       marginBottom: `1.45rem`,
       textAlign: 'center',
-      lineHeight: '1.4',
+      ...(inline
+        ? {
+            marginTop: '60px',
+          }
+        : {}),
     }}
   >
-    <div
-      style={
-        {
-          // maxWidth: 960,
-        }
-      }
-    >
+    <div className={inline ? 'inline' : ''}>
       <h1 className="names first">Holly</h1>
       <div className="and">and</div>
       <h1 className="names second">Eli</h1>
     </div>
   </header>
 );
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-};
-
-Header.defaultProps = {
-  siteTitle: ``,
-};
 
 export default Header;

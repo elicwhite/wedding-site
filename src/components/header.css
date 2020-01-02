@@ -12,12 +12,11 @@
 
 .and {
   font-size: calc(57px * var(--font-size-multiplier));
+  margin: calc(34px * var(--font-size-multiplier));
+  margin-bottom: calc(6px * var(--font-size-multiplier));
 }
 
-.names.first {
-  margin-bottom: calc(34px * var(--font-size-multiplier));
-}
-
-.names.second {
-  margin-top: calc(6px * var(--font-size-multiplier));
+.inline .names,
+.inline .and {
+  display: inline;
 }

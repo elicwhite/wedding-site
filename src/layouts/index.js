@@ -10,6 +10,8 @@ import './main.css';
 
 const Layout = ({ location, children }) => {
   const isLogin = !isLoggedIn() || location.pathname.includes('login');
+  const isHome = location.pathname === '/';
+  const needsInlineHeader = !isLogin && !isHome;
 
   const transitionProvider = (
     <TransitionProvider
@@ -36,7 +38,7 @@ const Layout = ({ location, children }) => {
 
   return (
     <>
-      <Header />
+      <Header inline={needsInlineHeader} />
       <SwitchTransition>
         <CSSTransition
           key={isLogin ? 'login' : 'auth'}
