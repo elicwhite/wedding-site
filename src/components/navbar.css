@@ -5,19 +5,18 @@ https://codepen.io/erikterwan/pen/EVzeRP
 #mobile-nav {
   display: block;
   position: fixed;
-  top: 50px;
-  left: 50px;
+  /* keeps the element from scrolling on ios chrome */
+  /* https://stackoverflow.com/questions/25014141/positionfixed-sliding-bug-in-chrome-mobile */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  top: 30px;
+  left: 30px;
 
   z-index: 1;
 
   -webkit-user-select: none;
   user-select: none;
 }
-
-/* #mobile-nav a {
-  text-decoration: none;
-  color: #232323;
-} */
 
 #mobile-nav input {
   display: block;
@@ -50,6 +49,8 @@ https://codepen.io/erikterwan/pen/EVzeRP
 
   z-index: 1;
   transform-origin: 4px 0px;
+  -webkit-transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
+    opacity 0.55s ease;
   transition: transform 0.5s cubic-bezier(0.77, 0.2, 0.05, 1),
     opacity 0.55s ease;
 }
