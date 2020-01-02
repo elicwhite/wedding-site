@@ -27,13 +27,7 @@ const IndexPage = () => {
     <>
       <SEO title="Home" />
       <div style={{ marginBottom: `1.45rem` }}>
-        <div
-          style={{
-            padding: '8px',
-            boxShadow: '0 1px 4px rgba(0,0,0,0.25)',
-            marginBottom: '30px',
-          }}
-        >
+        <div class="shadow-frame">
           <Image />
         </div>
         <div
