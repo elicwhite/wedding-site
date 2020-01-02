@@ -49,7 +49,7 @@ const Layout = ({ location, children }) => {
             {isLogin ? (
               transitionProvider
             ) : (
-              <>
+              <div>
                 <NavBar />
                 <div
                   style={{
@@ -61,7 +61,7 @@ const Layout = ({ location, children }) => {
                 >
                   {transitionProvider}
                 </div>
-              </>
+              </div>
             )}
           </>
         </CSSTransition>
