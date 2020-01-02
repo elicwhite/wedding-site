@@ -41,7 +41,7 @@ const IndexPage = () => {
               marginBottom: 'calc(16px * var(--font-size-multiplier))',
             }}
           >
-            Please join us for our wedding celebration on
+            Save the date
           </div>
           <div
             className="caps-subheader"

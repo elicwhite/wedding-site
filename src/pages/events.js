@@ -13,6 +13,7 @@ const EventsPage = () => {
           display: 'flex',
           flexDirection: 'row',
           marginTop: '34px',
+          flexWrap: 'wrap',
         }}
       >
         <div style={styles.flex}>
