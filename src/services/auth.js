@@ -9,7 +9,7 @@ const setUser = user =>
   window.localStorage.setItem('loggedIn', JSON.stringify(user));
 
 export const handleLogin = ({ password }) => {
-  if (password === 'password') {
+  if (password === 'getexcited') {
     setUser({
       loggedIn: true,
     });
