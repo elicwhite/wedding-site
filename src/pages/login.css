@@ -1,8 +1,8 @@
 .password-field {
   font-family: MrsEavesRoman;
   /* background-color: rgba(255, 255, 255, 0.7); */
-  /* border: 0; */
-  /* border-radius: 10px; */
+  border: 2px solid #ccc;
+  border-radius: 10px;
   /* font-family: sans-serif; */
   padding: 10px;
   text-align: center;

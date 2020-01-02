@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { navigate, useStaticQuery, graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import { navigate } from 'gatsby';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import './login.css';
 
@@ -16,7 +15,7 @@ function useInput() {
       type="text"
       onChange={e => setValue(e.target.value)}
       value={value}
-      placeholder="Enter Password"
+      placeholder="enter password"
     />
   );
 

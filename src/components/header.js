@@ -6,7 +6,6 @@ const Header = ({ inline }) => (
     className={'header ' + (inline ? 'inline' : '')}
     style={{
       paddingBottom: '30px',
-      marginBottom: `1.45rem`,
       textAlign: 'center',
     }}
   >

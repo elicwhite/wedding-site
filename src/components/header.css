@@ -23,6 +23,6 @@
 
 @media only screen and (max-width: 600px) {
   .header.inline {
-    margintop: '60px';
+    margin-top: 60px;
   }
 }
