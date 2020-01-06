@@ -36,6 +36,11 @@ function Links({ onClick = () => {} }) {
         </Link>
       </li>
       <li style={styles.listItem}>
+        <Link getProps={getProps} to="/registry" onClick={onClick}>
+          Registry
+        </Link>
+      </li>
+      <li style={styles.listItem}>
         <Link getProps={getProps} to="/login" onClick={onClick}>
           Login
         </Link>
@@ -111,7 +116,7 @@ const styles = {
     padding: '20px 15px',
   },
   currentLink: {
-    color: '#666',
+    color: 'var(--accent-color)',
   },
 };
 

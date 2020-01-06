@@ -148,6 +148,7 @@ https://codepen.io/erikterwan/pen/EVzeRP
 .link {
   text-decoration: none;
   color: black;
+  transition: color 0.25s;
 }
 
 #horizontal-nav {
