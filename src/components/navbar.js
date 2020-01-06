@@ -1,5 +1,5 @@
 import { Link } from 'gatsby';
-import React, { useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import './navbar.css';
 
 function getProps({ isCurrent }) {
@@ -49,27 +49,69 @@ function Links({ onClick = () => {} }) {
   );
 }
 
+function resetScroll() {
+  // When the menu is hidden, we want to remain at the top of the scroll position
+  const yOffset = parseInt(document.body.style.top, 10) * -1 || window.scrollY;
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = ``;
+  document.body.style.right = ``;
+  window.scrollTo(0, yOffset);
+}
+
 function MobileNavBar() {
-  const inputRef = useRef();
+  const [isOpen, setIsOpen] = useState(false);
+
+  const openClosedClass = isOpen ? 'open' : 'closed';
+
+  useEffect(() => {
+    if (isOpen) {
+      console.log('scroll', `-${window.scrollY}px`);
+      document.body.style.top = `-${window.scrollY}px`;
+      document.body.style.left = `0px`;
+      document.body.style.right = `0px`;
+      document.body.style.position = 'fixed';
+    } else {
+      resetScroll();
+    }
+
+    return () => {
+      resetScroll();
+    };
+  }, [isOpen]);
 
   return (
-    <div id="mobile-nav">
-      <input ref={inputRef} type="checkbox" />
-
-      <div className="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-
-      <ul id="mobile-nav-menu" className="menu">
-        <Links
+    <>
+      <div
+        id="background-catch"
+        className={openClosedClass}
+        onClick={() => {
+          setIsOpen(false);
+        }}
+      />
+      <div id="mobile-nav" className={openClosedClass}>
+        <div
+          className="hamburger"
           onClick={() => {
-            inputRef.current.checked = false;
+            setIsOpen(open => !open);
           }}
-        />
-      </ul>
-    </div>
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div id="mobile-nav-menu" className={openClosedClass}>
+          <ul className="menu">
+            <Links
+              onClick={() => {
+                setIsOpen(false);
+              }}
+            />
+          </ul>
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -9,6 +9,11 @@
   }
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   font-family: 'MrsEavesRoman';
   font-size: 18px; /*calc(18px * var(--font-size-multiplier));*/
