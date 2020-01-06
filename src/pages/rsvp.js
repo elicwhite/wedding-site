@@ -41,13 +41,15 @@ const RSVPPage = () => {
   return (
     <>
       <SEO title="Home" />
-      <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-        <h3>Name</h3>
-        <form onSubmit={handleSubmit}>
-          <div>{nameInput}</div>
+      <div className="section">
+        <div className="section-container">
+          <h3>Name</h3>
+          <form onSubmit={handleSubmit}>
+            <div>{nameInput}</div>
 
-          <input type="submit" value="Submit" />
-        </form>
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
       </div>
     </>
   );

@@ -40,8 +40,8 @@ const LoginPage = () => {
   }, [password]);
 
   return (
-    <>
-      <div style={{ position: 'relative', textAlign: 'center' }}>
+    <div className="section">
+      <div className="section-container" style={{ position: 'relative' }}>
         <SEO title="Login" />
         <div
           className="caps-subheader"
@@ -76,7 +76,7 @@ const LoginPage = () => {
           </CSSTransition>
         </SwitchTransition>
       </div>
-    </>
+    </div>
   );
 };
 

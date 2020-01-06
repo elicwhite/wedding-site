@@ -31,8 +31,8 @@ function Links({ onClick = () => {} }) {
         </Link>
       </li>
       <li style={styles.listItem}>
-        <Link getProps={getProps} to="/events" onClick={onClick}>
-          Events
+        <Link getProps={getProps} to="/logistics" onClick={onClick}>
+          Logistics
         </Link>
       </li>
       <li style={styles.listItem}>

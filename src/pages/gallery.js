@@ -81,22 +81,24 @@ const GalleryPage = () => {
   };
 
   return (
-    <>
-      <SEO title="Home" />
-      <Gallery
-        photos={previewPhotos}
-        renderImage={GalleryImage}
-        onClick={openLightbox}
-        margin={MARGIN}
-      />
-      <ModalGateway>
-        {viewerIsOpen ? (
-          <Modal onClose={closeLightbox}>
-            <Carousel views={fullscreenPhotos} currentIndex={currentImage} />
-          </Modal>
-        ) : null}
-      </ModalGateway>
-    </>
+    <div className="section">
+      <div className="section-container">
+        <SEO title="Home" />
+        <Gallery
+          photos={previewPhotos}
+          renderImage={GalleryImage}
+          onClick={openLightbox}
+          margin={MARGIN}
+        />
+        <ModalGateway>
+          {viewerIsOpen ? (
+            <Modal onClose={closeLightbox}>
+              <Carousel views={fullscreenPhotos} currentIndex={currentImage} />
+            </Modal>
+          ) : null}
+        </ModalGateway>
+      </div>
+    </div>
   );
 };
 
