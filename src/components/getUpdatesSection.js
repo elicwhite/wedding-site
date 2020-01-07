@@ -23,28 +23,27 @@ function GetUpdatesSection() {
     <div className="section">
       <div className="section-container">
         <h3 className="cursive">Get Updates</h3>
-        <p
-          style={{
-            // Force the text to wrap the and to the next line
-            maxWidth: '430px',
-            margin: 'auto',
-            marginBottom: 'calc(24px * var(--font-size-multiplier))',
-          }}
-        >
-          Get email updates for important wedding announcements and when new
-          information is posted.
-        </p>
-        <SwitchTransition>
-          <CSSTransition
-            key={success ? 'success' : 'not success'}
-            addEndListener={(node, done) =>
-              node.addEventListener('transitionend', done, false)
-            }
-            classNames="fade"
+        <div className="narrow-column">
+          <p
+            style={{
+              marginBottom: 'calc(24px * var(--font-size-multiplier))',
+            }}
           >
-            {content}
-          </CSSTransition>
-        </SwitchTransition>
+            Get email updates for important wedding announcements and when new
+            information is posted.
+          </p>
+          <SwitchTransition>
+            <CSSTransition
+              key={success ? 'success' : 'not success'}
+              addEndListener={(node, done) =>
+                node.addEventListener('transitionend', done, false)
+              }
+              classNames="fade"
+            >
+              {content}
+            </CSSTransition>
+          </SwitchTransition>
+        </div>
       </div>
     </div>
   );
@@ -164,6 +163,7 @@ const styles = {
     color: 'white',
     padding: '10px 55px 5px',
     fontSize: '28px',
+    border: 0,
   },
 };
 

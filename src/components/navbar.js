@@ -36,6 +36,11 @@ function Links({ onClick = () => {} }) {
         </Link>
       </li>
       <li style={styles.listItem}>
+        <Link getProps={getProps} to="/travel" onClick={onClick}>
+          Travel
+        </Link>
+      </li>
+      <li style={styles.listItem}>
         <Link getProps={getProps} to="/registry" onClick={onClick}>
           Registry
         </Link>
