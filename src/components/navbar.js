@@ -26,8 +26,8 @@ function Links({ onClick = () => {} }) {
         </Link>
       </li>
       <li style={styles.listItem}>
-        <Link getProps={getProps} to="/gallery" onClick={onClick}>
-          Photos
+        <Link getProps={getProps} to="/ourstory" onClick={onClick}>
+          Our Story
         </Link>
       </li>
       <li style={styles.listItem}>
@@ -71,7 +71,6 @@ function MobileNavBar() {
 
   useEffect(() => {
     if (isOpen) {
-      console.log('scroll', `-${window.scrollY}px`);
       document.body.style.top = `-${window.scrollY}px`;
       document.body.style.left = `0px`;
       document.body.style.right = `0px`;
