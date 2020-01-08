@@ -2,52 +2,90 @@ import { Link } from 'gatsby';
 import React, { useState, useEffect } from 'react';
 import './navbar.css';
 
-function getProps({ isCurrent }) {
-  return {
-    className: 'link',
-    style: {
-      ...styles.link,
-      ...(isCurrent ? styles.currentLink : {}),
-    },
-  };
-}
-
 function Links({ onClick = () => {} }) {
   return (
     <>
       <li style={styles.listItem}>
-        <Link getProps={getProps} to="/" onClick={onClick}>
+        <Link
+          className="link"
+          style={styles.link}
+          activeStyle={styles.currentLink}
+          to="/"
+          onClick={onClick}
+        >
           Home
         </Link>
       </li>
 
       <li style={styles.listItem}>
-        <Link getProps={getProps} to="/ourstory" onClick={onClick}>
+        <Link
+          className="link"
+          style={styles.link}
+          activeStyle={styles.currentLink}
+          partiallyActive={true}
+          to="/ourstory"
+          onClick={onClick}
+        >
           Our Story
         </Link>
       </li>
       <li style={styles.listItem}>
-        <Link getProps={getProps} to="/logistics" onClick={onClick}>
+        <Link
+          className="link"
+          style={styles.link}
+          activeStyle={styles.currentLink}
+          partiallyActive={true}
+          to="/logistics"
+          onClick={onClick}
+        >
           Wedding
         </Link>
       </li>
       <li style={styles.listItem}>
-        <Link getProps={getProps} to="/travel" onClick={onClick}>
+        <Link
+          className="link"
+          style={styles.link}
+          activeStyle={styles.currentLink}
+          partiallyActive={true}
+          to="/travel"
+          onClick={onClick}
+        >
           Travel
         </Link>
       </li>
       <li style={styles.listItem}>
-        <Link getProps={getProps} to="/registry" onClick={onClick}>
+        <Link
+          className="link"
+          style={styles.link}
+          activeStyle={styles.currentLink}
+          partiallyActive={true}
+          to="/registry"
+          onClick={onClick}
+        >
           Registry
         </Link>
       </li>
       <li style={styles.listItem}>
-        <Link getProps={getProps} to="/rsvp" onClick={onClick}>
+        <Link
+          className="link"
+          style={styles.link}
+          activeStyle={styles.currentLink}
+          partiallyActive={true}
+          to="/rsvp"
+          onClick={onClick}
+        >
           RSVP
         </Link>
       </li>
       <li style={styles.listItem}>
-        <Link getProps={getProps} to="/login" onClick={onClick}>
+        <Link
+          className="link"
+          style={styles.link}
+          activeStyle={styles.currentLink}
+          partiallyActive={true}
+          to="/login"
+          onClick={onClick}
+        >
           Login
         </Link>
       </li>
