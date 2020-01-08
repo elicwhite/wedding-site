@@ -54,6 +54,7 @@ const GalleryPage = () => {
       ...image,
       width: image.aspectRatio,
       height: 1,
+      caption: 'whee'
     };
   });
 
@@ -64,6 +65,7 @@ const GalleryPage = () => {
       ...image,
       width: image.aspectRatio,
       height: 1,
+      caption: 'whee',
     };
   });
 
@@ -93,7 +95,14 @@ const GalleryPage = () => {
         <ModalGateway>
           {viewerIsOpen ? (
             <Modal onClose={closeLightbox}>
-              <Carousel views={fullscreenPhotos} currentIndex={currentImage} />
+              <Carousel views={fullscreenPhotos} currentIndex={currentImage} styles={{
+                footerCaption: () => ({
+                  fontSize: '18px',
+                }),
+                footerCount: () => ({
+                  fontSize: '18px',
+                })
+              }} />
             </Modal>
           ) : null}
         </ModalGateway>
