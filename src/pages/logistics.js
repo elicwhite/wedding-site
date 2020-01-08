@@ -15,7 +15,7 @@ const LogisticsPage = () => {
         }}
       >
         <div className="section-container">
-          <h3 class="cursive">Ceremony & Reception</h3>
+          <h3 className="cursive">Ceremony & Reception</h3>
           <div
             style={{
               display: 'flex',
@@ -24,7 +24,7 @@ const LogisticsPage = () => {
             }}
           >
             <div>
-              <div class="shadow-frame" style={styles.mapContainer}>
+              <div className="shadow-frame" style={styles.mapContainer}>
                 <div style={styles.mapInnerContainer}>
                   <iframe
                     style={styles.iframe}
@@ -46,19 +46,19 @@ const LogisticsPage = () => {
             </div>
           </div>
 
-          <h3 class="cursive">Travel</h3>
+          <h3 className="cursive">Travel</h3>
           <p>
             Our venue is very close to the San Jose Airport. SFO and Oakland are
             also reasonable options.
           </p>
 
-          <h3 class="cursive">Hotels</h3>
+          <h3 className="cursive">Hotels</h3>
           <p>
             Room block information to come later. As we are in downtown San Jose
             there are many hotels within a few minute walking distance.
           </p>
 
-          <h3 class="cursive">Things to do</h3>
+          <h3 className="cursive">Things to do</h3>
           <p>We don't know what to do yet!</p>
         </div>
       </div>

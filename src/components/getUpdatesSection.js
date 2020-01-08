@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import './getUpdatesSection.css';
 
+import useInput from '../hooks/useInput';
+
+const URL = 'https://script.google.com/macros/s/AKfycbyVaQG75kkOhAo8LmEXS0neJzz2lvTG1UeXzVC3lTnr-NqMDzAH/exec';
+const LOCAL_STORAGE_KEY = 'completedUpdateForm'
+// Has to be a string
+const LOCAL_STORAGE_VALUE = 'set';
+
 function GetUpdatesSection() {
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(window.localStorage.getItem(LOCAL_STORAGE_KEY) === LOCAL_STORAGE_VALUE);
 
   const content = success ? (
     <SuccessMessage
@@ -14,6 +21,7 @@ function GetUpdatesSection() {
   ) : (
     <EmailForm
       onComplete={() => {
+        window.localStorage.setItem(LOCAL_STORAGE_KEY, LOCAL_STORAGE_VALUE);
         setSuccess(true);
       }}
     />
@@ -75,6 +83,31 @@ function SuccessMessage({ onEnterMore }) {
 
 function EmailForm({ onComplete }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [email, emailInput] = useInput({
+    style: styles.emailInput,
+    placeholder: "email address*",
+  });
+
+  const handleSubmit = event => {
+    event.preventDefault();
+    setIsSubmitting(true);
+
+    const formData = {};
+    formData.email = email;
+
+    fetch(URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    }).then(() => {
+      onComplete();
+    }).catch(() => {
+      onComplete();
+    });
+  }
 
   const submitOrSpinner = isSubmitting ? (
     <Spinner />
@@ -86,19 +119,9 @@ function EmailForm({ onComplete }) {
 
   return (
     <form
-      onSubmit={e => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        setTimeout(() => {
-          onComplete();
-        }, 1000);
-      }}
+      onSubmit={handleSubmit}
     >
-      <input
-        type="text"
-        style={styles.emailInput}
-        placeholder="email address*"
-      />
+      {emailInput}
       <p
         style={{
           fontSize: '16px',
