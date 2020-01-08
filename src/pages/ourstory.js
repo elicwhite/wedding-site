@@ -163,9 +163,9 @@ const GalleryPage = () => {
                 height: '100%',
               }}
               src="https://www.youtube.com/embed/Tczp4_kkVus"
-              frameborder="0"
+              frameBorder="0"
               allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen
+              allowFullScreen={true}
             ></iframe>
           </div>
         </div>
