@@ -4,13 +4,16 @@ import './getUpdatesSection.css';
 
 import useInput from '../hooks/useInput';
 
-const URL = 'https://script.google.com/macros/s/AKfycbyVaQG75kkOhAo8LmEXS0neJzz2lvTG1UeXzVC3lTnr-NqMDzAH/exec';
-const LOCAL_STORAGE_KEY = 'completedUpdateForm'
+const URL =
+  'https://script.google.com/macros/s/AKfycbyVaQG75kkOhAo8LmEXS0neJzz2lvTG1UeXzVC3lTnr-NqMDzAH/exec';
+const LOCAL_STORAGE_KEY = 'completedUpdateForm';
 // Has to be a string
 const LOCAL_STORAGE_VALUE = 'set';
 
 function GetUpdatesSection() {
-  const [success, setSuccess] = useState(window.localStorage.getItem(LOCAL_STORAGE_KEY) === LOCAL_STORAGE_VALUE);
+  const [success, setSuccess] = useState(
+    window.localStorage.getItem(LOCAL_STORAGE_KEY) === LOCAL_STORAGE_VALUE
+  );
   const cameFromEnterMore = useRef(false);
 
   const content = success ? (
@@ -89,14 +92,14 @@ function EmailForm({ cameFromEnterMore, onComplete }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [email, emailInput, emailInputRef] = useInput({
     style: styles.emailInput,
-    placeholder: "email address*",
+    placeholder: 'email address*',
   });
 
   useEffect(() => {
     if (cameFromEnterMore && emailInputRef.current != null) {
       emailInputRef.current.focus();
     }
-  }, [cameFromEnterMore, emailInputRef])
+  }, [cameFromEnterMore, emailInputRef]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -112,12 +115,14 @@ function EmailForm({ cameFromEnterMore, onComplete }) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
-    }).then(() => {
-      onComplete();
-    }).catch(() => {
-      onComplete();
-    });
-  }
+    })
+      .then(() => {
+        onComplete();
+      })
+      .catch(() => {
+        onComplete();
+      });
+  };
 
   const submitOrSpinner = isSubmitting ? (
     <Spinner />
@@ -128,9 +133,7 @@ function EmailForm({ cameFromEnterMore, onComplete }) {
   );
 
   return (
-    <form
-      onSubmit={handleSubmit}
-    >
+    <form onSubmit={handleSubmit}>
       {emailInput}
       <p
         style={{
