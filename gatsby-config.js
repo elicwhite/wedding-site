@@ -17,8 +17,22 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `gallery`,
-        path: `${__dirname}/src/images/gallery`,
+        name: `engagement`,
+        path: `${__dirname}/src/images/engagement`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `travel`,
+        path: `${__dirname}/src/images/travel`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `howwemet`,
+        path: `${__dirname}/src/images/howwemet`,
       },
     },
     `gatsby-transformer-sharp`,

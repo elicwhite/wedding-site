@@ -55,7 +55,7 @@ h4 {
 
 .section-container {
   max-width: 960px;
-  padding: 0px 1.0875rem 1.5rem;
+  padding: 1.5rem 1.0875rem 1.5rem;
   margin: 0 auto;
   text-align: center;
 }
@@ -75,5 +75,6 @@ h4 {
 
 .narrow-column {
   max-width: 600px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
