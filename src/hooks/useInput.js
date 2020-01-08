@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function useInput(props = {}) {
   const [value, setValue] = useState('');
+  const inputRef = useRef(null);
   const input = (
-    <input type="text" onChange={e => setValue(e.target.value)} value={value} {...props} />
+    <input type="text" ref={inputRef} onChange={e => setValue(e.target.value)} value={value} {...props} />
   );
 
-  return [value, input];
+  return [value, input, inputRef];
 }

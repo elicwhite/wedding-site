@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import './getUpdatesSection.css';
 
@@ -11,17 +11,21 @@ const LOCAL_STORAGE_VALUE = 'set';
 
 function GetUpdatesSection() {
   const [success, setSuccess] = useState(window.localStorage.getItem(LOCAL_STORAGE_KEY) === LOCAL_STORAGE_VALUE);
+  const cameFromEnterMore = useRef(false);
 
   const content = success ? (
     <SuccessMessage
       onEnterMore={() => {
+        cameFromEnterMore.current = true;
         setSuccess(false);
       }}
     />
   ) : (
     <EmailForm
+      cameFromEnterMore={cameFromEnterMore.current}
       onComplete={() => {
         window.localStorage.setItem(LOCAL_STORAGE_KEY, LOCAL_STORAGE_VALUE);
+        cameFromEnterMore.current = false;
         setSuccess(true);
       }}
     />
@@ -81,12 +85,18 @@ function SuccessMessage({ onEnterMore }) {
   );
 }
 
-function EmailForm({ onComplete }) {
+function EmailForm({ cameFromEnterMore, onComplete }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [email, emailInput] = useInput({
+  const [email, emailInput, emailInputRef] = useInput({
     style: styles.emailInput,
     placeholder: "email address*",
   });
+
+  useEffect(() => {
+    if (cameFromEnterMore && emailInputRef.current != null) {
+      emailInputRef.current.focus();
+    }
+  }, [cameFromEnterMore, emailInputRef])
 
   const handleSubmit = event => {
     event.preventDefault();
