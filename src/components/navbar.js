@@ -20,11 +20,7 @@ function Links({ onClick = () => {} }) {
           Home
         </Link>
       </li>
-      <li style={styles.listItem}>
-        <Link getProps={getProps} to="/rsvp" onClick={onClick}>
-          RSVP
-        </Link>
-      </li>
+
       <li style={styles.listItem}>
         <Link getProps={getProps} to="/ourstory" onClick={onClick}>
           Our Story
@@ -32,7 +28,7 @@ function Links({ onClick = () => {} }) {
       </li>
       <li style={styles.listItem}>
         <Link getProps={getProps} to="/logistics" onClick={onClick}>
-          Logistics
+          Wedding
         </Link>
       </li>
       <li style={styles.listItem}>
@@ -43,6 +39,11 @@ function Links({ onClick = () => {} }) {
       <li style={styles.listItem}>
         <Link getProps={getProps} to="/registry" onClick={onClick}>
           Registry
+        </Link>
+      </li>
+      <li style={styles.listItem}>
+        <Link getProps={getProps} to="/rsvp" onClick={onClick}>
+          RSVP
         </Link>
       </li>
       <li style={styles.listItem}>
