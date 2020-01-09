@@ -35,7 +35,7 @@ function Links({ onClick = () => {} }) {
           style={styles.link}
           activeStyle={styles.currentLink}
           partiallyActive={true}
-          to="/logistics"
+          to="/wedding"
           onClick={onClick}
         >
           Wedding
