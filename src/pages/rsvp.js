@@ -44,6 +44,7 @@ const RSVPPage = () => {
 
   const content = SHOW_RSVP ? (
     <>
+      <h3 className="cursive">RSVP</h3>
       <h3>Name</h3>
       <form onSubmit={handleSubmit}>
         <div>{nameInput}</div>
@@ -52,17 +53,34 @@ const RSVPPage = () => {
       </form>
     </>
   ) : (
-    <ComingSoon />
+    <>
+      <h3 className="cursive">Can't Attend?</h3>
+      <div className="caps-subheader accent">We're going to miss you!</div>
+      <p>
+        It will greatly help with our planning to know if you are unable to
+        attend. If you already know about a conflict kindly send you regrets via
+        email to{' '}
+        <a className="accent" href="mailto:hollyandeli@gmail.com">
+          hollyandeli@gmail.com
+        </a>
+        .
+      </p>
+      <p>
+        Excited to let us know you’re coming, or still unsure of your plans?
+        You’ve still got time to figure it out - online RSVP will open at a
+        later date.
+      </p>
+
+      <h3 className="cursive">RSVP</h3>
+      <ComingSoon />
+    </>
   );
 
   return (
     <>
       <SEO title="RSVP" />
       <div className="section">
-        <div className="section-container">
-          <h3 className="cursive">RSVP</h3>
-          {content}
-        </div>
+        <div className="section-container narrow-column">{content}</div>
       </div>
       <GetUpdatesSection />
     </>
