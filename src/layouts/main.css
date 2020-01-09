@@ -64,6 +64,7 @@ h4 {
   background-color: #f2f2f2;
 }
 
+.invert-section,
 .section:nth-child(even) .section-container {
   background-color: #f2f2f2;
   padding-top: 1.5rem;
@@ -77,4 +78,44 @@ h4 {
   max-width: 600px;
   margin-left: auto;
   margin-right: auto;
+}
+
+/* Used for manual transitions */
+.fade,
+.fade-fast {
+  opacity: 0;
+}
+
+.fade-active {
+  opacity: 1;
+}
+
+/* Used for React animation groups */
+.fade-enter,
+.fade-fast-enter {
+  opacity: 0;
+}
+.fade-enter-active,
+.fade-fast-enter-active {
+  opacity: 1;
+}
+.fade-exit,
+.fade-fast-exit {
+  opacity: 1;
+}
+.fade-exit-active,
+.fade-fast-exit-active {
+  opacity: 0;
+}
+
+.fade,
+.fade-enter-active,
+.fade-exit-active {
+  transition: opacity 500ms;
+}
+
+.fade-fast,
+.fade-fast-enter-active,
+.fade-fast-exit-active {
+  transition: opacity 200ms;
 }

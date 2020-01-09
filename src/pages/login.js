@@ -5,79 +5,119 @@ import './login.css';
 
 import { handleLogin } from '../services/auth';
 import SEO from '../components/seo';
-
-function useInput() {
-  const [value, setValue] = useState('');
-  const input = (
-    <input
-      autoCapitalize="off"
-      className="password-field"
-      type="text"
-      onChange={e => setValue(e.target.value)}
-      value={value}
-      placeholder="enter password"
-    />
-  );
-
-  return [value, input];
-}
+import GetUpdatesSection from '../components/getUpdatesSection';
+import useInput from '../hooks/useInput';
 
 const LoginPage = () => {
-  const [enteredSuccessfully, setEnteredSuccessfully] = useState(false);
-  const [password, passwordInput] = useInput();
+  const [enteredSuccessfully, setEnteredSuccessfully] = useState(null);
+  const [password, passwordInput, passwordInputRef] = useInput({
+    autoCapitalize: 'off',
+    placeholder: 'password',
+    style: styles.input,
+  });
 
   useEffect(() => {
+    // When one character is entered, reset this state
+    if (enteredSuccessfully === false) {
+      setEnteredSuccessfully(null);
+    }
+  }, [password]);
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
     const success = handleLogin({
       password: password,
     });
 
+    setEnteredSuccessfully(success);
     if (success) {
-      setEnteredSuccessfully(success);
       setTimeout(() => {
         navigate(`/`);
       }, 2000);
     }
-  }, [password]);
+  };
 
   return (
-    <div className="section">
-      <div className="section-container" style={{ position: 'relative' }}>
-        <SEO title="Login" />
+    <>
+      <SEO title="Login" />
+      <div className="section"></div>
+      <div className="section" style={{ marginTop: '1.5rem' }}>
         <div
-          className="caps-subheader"
-          style={{
-            marginBottom: '20px',
-          }}
+          className="section-container narrow-column"
+          style={{ position: 'relative' }}
         >
-          Please enter the password from the Save the Date
-        </div>
-
-        <SwitchTransition>
-          <CSSTransition
-            key={enteredSuccessfully ? 'success' : 'password'}
-            addEndListener={(node, done) =>
-              node.addEventListener('transitionend', done, false)
-            }
-            classNames="fade"
+          <h3 className="cursive">Welcome</h3>
+          <p
+            style={{
+              marginBottom: 'calc(24px * var(--font-size-multiplier))',
+            }}
           >
-            {enteredSuccessfully ? (
-              <span
-                style={{
-                  fontSize: 60,
-                }}
-                role="img"
-                aria-label="success"
+            Please enter the password from your Save the Date postcard for
+            access to wedding details.
+          </p>
+          <form onSubmit={handleSubmit}>
+            <SwitchTransition>
+              <CSSTransition
+                key={enteredSuccessfully === true ? 'success' : 'password'}
+                addEndListener={(node, done) =>
+                  node.addEventListener('transitionend', done, false)
+                }
+                classNames="fade"
               >
-                😍
-              </span>
-            ) : (
-              passwordInput
-            )}
-          </CSSTransition>
-        </SwitchTransition>
+                {enteredSuccessfully ? (
+                  <span
+                    style={{
+                      fontSize: 60,
+                      verticalAlign: 'text-top',
+                    }}
+                    role="img"
+                    aria-label="success"
+                  >
+                    😍
+                  </span>
+                ) : (
+                  passwordInput
+                )}
+              </CSSTransition>
+            </SwitchTransition>
+            <p />
+            <button type="submit" style={styles.submit}>
+              Submit
+            </button>
+          </form>
+
+          <p
+            className={`accent fade ${
+              enteredSuccessfully === false ? 'fade-active' : ''
+            }`}
+            style={styles.incorrect}
+          >
+            Whoops! You've entered the wrong password.
+          </p>
+        </div>
       </div>
-    </div>
+    </>
   );
+};
+
+const styles = {
+  input: {
+    width: '350px',
+    padding: '10px 20px 5px',
+    marginBottom: 'calc(10px * var(--font-size-multiplier))',
+  },
+  incorrect: {
+    marginBottom: 0,
+  },
+  submit: {
+    fontFamily: 'MrsEavesAllPetiteCaps',
+    backgroundColor: 'var(--accent-color)',
+    color: 'white',
+    padding: '10px 55px 5px',
+    fontSize: '28px',
+    border: 0,
+  },
 };
 
 export default LoginPage;

@@ -619,30 +619,3 @@ pre tt:after {
     font-size: 100%;
   }
 }
-
-.fade-enter,
-.fade-fast-enter {
-  opacity: 0;
-}
-.fade-enter-active,
-.fade-fast-enter-active {
-  opacity: 1;
-}
-.fade-exit,
-.fade-fast-exit {
-  opacity: 1;
-}
-.fade-exit-active,
-.fade-fast-exit-active {
-  opacity: 0;
-}
-
-.fade-enter-active,
-.fade-exit-active {
-  transition: opacity 500ms;
-}
-
-.fade-fast-enter-active,
-.fade-fast-exit-active {
-  transition: opacity 200ms;
-}
