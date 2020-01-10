@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { navigate } from 'gatsby';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import './login.css';
-import '@lottiefiles/lottie-player';
+import Lottie from 'react-lottie';
+import animationData from './lf30_editor_6vOhkS.json';
 
 import { handleLogin } from '../services/auth';
 import SEO from '../components/seo';
@@ -23,7 +24,7 @@ const LoginPage = () => {
     if (enteredSuccessfully === false) {
       setEnteredSuccessfully(null);
     }
-  }, [password]);
+  }, [enteredSuccessfully, password]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -33,11 +34,11 @@ const LoginPage = () => {
     });
 
     setEnteredSuccessfully(success);
-    if (success) {
-      setTimeout(() => {
-        navigate(`/`);
-      }, 2000);
-    }
+    // if (success) {
+    //   setTimeout(() => {
+    //     navigate(`/`);
+    //   }, 2200);
+    // }
   };
 
   return (
@@ -76,16 +77,24 @@ const LoginPage = () => {
                     role="img"
                     aria-label="success"
                   >
-                    <lottie-player
-                      src="lf30_editor_IsTUTm.json"
-                      background="transparent"
-                      speed="1"
-                      style={{
-                        width: '300px',
-                        height: '300px',
+                    <Lottie
+                      options={{
+                        autoplay: true,
+                        loop: false,
+                        animationData: animationData,
+                        rendererSettings: {
+                          preserveAspectRatio: 'xMidYMid slice',
+                        },
                       }}
-                      autoplay
-                    ></lottie-player>
+                      height={300}
+                      width={300}
+                      eventListeners={[
+                        {
+                          eventName: 'complete',
+                          callback: () => navigate(`/`),
+                        },
+                      ]}
+                    />
                   </span>
                 ) : (
                   <div>

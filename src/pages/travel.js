@@ -17,13 +17,13 @@ const TravelPage = () => {
             Mineta San Jose International Airport
           </div>
           <p>
-            Blanco Venue and chosen hotels are about 4 miles from SJC.
-            <br />
-            Rideshare from the airport is about $8-$20.
+            Our venue is about 4 miles from Norman Y. Mineta San Jose
+            International Airport (SJC). Rideshare from the airport is about
+            $8-$20.
           </p>
           <p>
-            San Francisco International Airport (SFO) and Oakland (OAK) are also
-            options but are about 35 miles away.
+            San Francisco International Airport (SFO) and Oakland International
+            Airport (OAK) are also options but are about 35 miles away.
           </p>
           <br />
 
@@ -43,7 +43,11 @@ const TravelPage = () => {
             <p>
               Get a glimpse into Holly's workplace.
               <br />
-              <a href="#" target="blank" className="accent">
+              <a
+                href="https://www.apple.com/retail/appleparkvisitorcenter/"
+                target="blank"
+                className="accent"
+              >
                 learn more
               </a>
             </p>
@@ -54,7 +58,11 @@ const TravelPage = () => {
             <p>
               Learn about the tech that makes Silicon Valley unique!
               <br />
-              <a href="#" target="blank" className="accent">
+              <a
+                href="https://computerhistory.org"
+                target="blank"
+                className="accent"
+              >
                 visit website
               </a>
             </p>
@@ -66,7 +74,11 @@ const TravelPage = () => {
               Check out our neighborhood and enjoy the atmosphere, restaurants,
               and movie theater.
               <br />
-              <a href="#" target="blank" className="accent">
+              <a
+                href="http://www.downtownredwoodcity.org"
+                target="blank"
+                className="accent"
+              >
                 learn more
               </a>
             </p>
@@ -91,8 +103,12 @@ const TravelPage = () => {
               Drive-Ins and Dives. Grab a "Best Value" for a perfect falafel
               pita and banana shake.
               <br />
-              <a href="#" target="blank" className="accent">
-                learn more
+              <a
+                href="https://goo.gl/maps/B6PUBxTZqYvUp2T18"
+                target="blank"
+                className="accent"
+              >
+                get directions
               </a>
             </p>
           </div>
@@ -105,8 +121,12 @@ const TravelPage = () => {
               Get the brisket, cornbread, and mac and cheese at this unassuming
               BBQ joint. Holly loves that you can request a "lean" cut of meat!
               <br />
-              <a href="#" target="blank" className="accent">
-                learn more
+              <a
+                href="https://goo.gl/maps/uxCY2X17Fp6E5a7D9"
+                target="blank"
+                className="accent"
+              >
+                get directions
               </a>
             </p>
           </div>
@@ -119,8 +139,12 @@ const TravelPage = () => {
               One of Eli's favorite places serving persian kabobs and delicious
               fresh baked flatbread.
               <br />
-              <a href="#" target="blank" className="accent">
-                learn more
+              <a
+                href="https://goo.gl/maps/KMCBr3B7nzvSxfFUA"
+                target="blank"
+                className="accent"
+              >
+                get directions
               </a>
             </p>
           </div>
@@ -133,8 +157,12 @@ const TravelPage = () => {
               One of Holly's favorite places serving local New American cuisine
               in a small, often busy location.
               <br />
-              <a href="#" target="blank" className="accent">
-                learn more
+              <a
+                href="https://goo.gl/maps/Ci518TQzJmY1dqty9"
+                target="blank"
+                className="accent"
+              >
+                get directions
               </a>
             </p>
           </div>
