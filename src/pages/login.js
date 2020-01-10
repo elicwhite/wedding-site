@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { navigate } from 'gatsby';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import './login.css';
@@ -18,13 +18,16 @@ const LoginPage = () => {
     placeholder: 'password',
     style: styles.input,
   });
+  const previousPassword = useRef(password);
 
   useEffect(() => {
     // When one character is entered, reset this state
-    if (enteredSuccessfully === false) {
+    if (enteredSuccessfully === false && previousPassword.current !== password) {
       setEnteredSuccessfully(null);
     }
-  }, [enteredSuccessfully, password]);
+
+    previousPassword.current = password;
+  }, [previousPassword, enteredSuccessfully, password]);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -34,11 +37,6 @@ const LoginPage = () => {
     });
 
     setEnteredSuccessfully(success);
-    // if (success) {
-    //   setTimeout(() => {
-    //     navigate(`/`);
-    //   }, 2200);
-    // }
   };
 
   return (
