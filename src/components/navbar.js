@@ -167,7 +167,6 @@ const HorizontalNavBar = () => (
       top: 0,
       backgroundColor: 'white',
       zIndex: 1,
-      marginBottom: '10px',
       padding: '15px',
     }}
   >

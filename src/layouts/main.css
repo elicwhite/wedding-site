@@ -36,7 +36,7 @@ body {
 
 h3.cursive {
   /* Was 48 before */
-  font-size: calc(64px * var(--font-size-multiplier));
+  font-size: calc(72px * var(--font-size-multiplier));
   /* margin-bottom: calc(24px * var(--font-size-multiplier)); */
 }
 
@@ -44,6 +44,7 @@ h4 {
   font-family: 'MrsEavesRoman';
   font-size: calc(32px * var(--font-size-multiplier));
   font-weight: 400;
+  margin-bottom: 0;
 }
 
 /* used on index image and event map */
@@ -55,7 +56,7 @@ h4 {
 
 .section-container {
   max-width: 960px;
-  padding: 1.5rem 1.0875rem 1.5rem;
+  padding: 2rem 1.0875rem;
   margin: 0 auto;
   text-align: center;
 }
@@ -67,7 +68,6 @@ h4 {
 .invert-section,
 .section:nth-child(even) .section-container {
   background-color: #f2f2f2;
-  padding-top: 1.5rem;
 }
 
 .accent {
@@ -78,6 +78,10 @@ h4 {
   max-width: 700px;
   margin-left: auto;
   margin-right: auto;
+}
+
+.place {
+  margin-bottom: 2rem;
 }
 
 /* Used for manual transitions */
@@ -119,3 +123,4 @@ h4 {
 .fade-fast-exit-active {
   transition: opacity 200ms;
 }
+

@@ -25,6 +25,7 @@ const TravelPage = () => {
             San Francisco International Airport (SFO) and Oakland (OAK) are also
             options but are about 35 miles away.
           </p>
+          <br />
 
           <h3 className="cursive">Hotels</h3>
           <ComingSoon />
@@ -37,6 +38,7 @@ const TravelPage = () => {
           <div className="caps-subheader accent">
             A Glimpse of Silicon Valley
           </div>
+          <div className="place">
           <h4>Apple Park Visitor Center</h4>
           <p>
             Get a glimpse into Holly's workplace.
@@ -45,7 +47,9 @@ const TravelPage = () => {
               learn more
             </a>
           </p>
+          </div>
 
+          <div className="place">
           <h4>Computer History Museum</h4>
           <p>
             Learn about the tech that makes Silicon Valley unique!
@@ -54,7 +58,9 @@ const TravelPage = () => {
               visit website
             </a>
           </p>
+          </div>
 
+          <div className="place">
           <h4>Walk Downtown Redwood City</h4>
           <p>
             Check out our neighborhood and enjoy the atmosphere, restaurants,
@@ -64,45 +70,50 @@ const TravelPage = () => {
               learn more
             </a>
           </p>
+          </div>
 
+          <div className="place">
           <h4>Shope & Eat in Walkable Downtowns</h4>
           <p>
             Explore some of the other cities and walkable areas including: San
             Pedro Square, Santana Row, Downtown Sunnyvale, Downtown Mountain
             View, Downtown Palo Alto, and Downtown San Carlos.
           </p>
+          </div>
 
+  <h3 className="cursive">Eat</h3>
           <div className="caps-subheader accent">Our Favorite Eats</div>
-          <h4>Falafel's Drive In</h4>
+          <div className="place">
           <span>San Jose, CA</span>
+          <h4>Falafel's Drive In</h4>
           <p>
             Casual mediterranean eats featured on Guy Fieri's Diners, Drive-Ins
-            and Dives.
-            <br />
-            Grab a "Best Value" for a perfect falafel pita and banana shake.
+            and Dives. Grab a "Best Value" for a perfect falafel pita and banana shake.
             <br />
             <a href="#" target="blank" className="accent">
               learn more
             </a>
           </p>
+          </div>
 
           <br />
-          <h4>Smoking Pig BBQ Company</h4>
+          <div className="place">
           <span>San Jose, CA</span>
+          <h4>Smoking Pig BBQ Company</h4>
           <p>
             Get the brisket, cornbread, and mac and cheese at this unassuming
-            BBQ joint.
-            <br />
-            Holly loves that you can request a "lean" cut of meat!
+            BBQ joint. Holly loves that you can request a "lean" cut of meat!
             <br />
             <a href="#" target="blank" className="accent">
               learn more
             </a>
           </p>
+          </div>
 
           <br />
-          <h4>Shalizaar</h4>
+          <div className="place">
           <span>Belmont, CA</span>
+          <h4>Shalizaar</h4>
           <p>
             One of Eli's favorite places serving persian kabobs and delicious
             fresh baked flatbread.
@@ -111,10 +122,12 @@ const TravelPage = () => {
               learn more
             </a>
           </p>
+          </div>
 
           <br />
-          <h4>Johnston's Saltbox</h4>
+          <div className="place">
           <span>San Carlos, CA</span>
+          <h4>Johnston's Saltbox</h4>
           <p>
             One of Holly's favorite places serving local New American cuisine in
             a small, often busy location.
@@ -123,6 +136,7 @@ const TravelPage = () => {
               learn more
             </a>
           </p>
+          </div>
         </div>
       </div>
     </>

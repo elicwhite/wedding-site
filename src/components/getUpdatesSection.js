@@ -39,11 +39,7 @@ function GetUpdatesSection() {
       <div className="section-container">
         <h3 className="cursive">Get Updates</h3>
         <div className="narrow-column">
-          <p
-            style={{
-              marginBottom: 'calc(24px * var(--font-size-multiplier))',
-            }}
-          >
+          <p>
             Get email updates for important wedding announcements and when new
             information is posted.
           </p>
@@ -137,7 +133,7 @@ function EmailForm({ cameFromEnterMore, onComplete }) {
       {emailInput}
       <p
         style={{
-          fontSize: '16px',
+          fontSize: '18px',
         }}
       >
         * we made this website, so we won't sell or share your personal
