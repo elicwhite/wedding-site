@@ -85,7 +85,7 @@ const TravelPage = () => {
           </div>
 
           <div className="place">
-            <h4>Shope & Eat in Walkable Downtowns</h4>
+            <h4>Shop & Eat in Walkable Downtowns</h4>
             <p>
               Explore some of the other cities and walkable areas including: San
               Pedro Square, Santana Row, Downtown Sunnyvale, Downtown Mountain

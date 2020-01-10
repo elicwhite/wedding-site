@@ -98,7 +98,9 @@ const LoginPage = () => {
                   </span>
                 ) : (
                   <div>
-                    {passwordInput}
+                    <div style={styles.inputContainer}>
+                      {passwordInput}
+                    </div>
                     <p />
                     <button type="submit" style={styles.submit}>
                       Submit
@@ -125,8 +127,13 @@ const LoginPage = () => {
 
 const styles = {
   input: {
-    width: '350px',
+    width: '100%',
     padding: '10px 20px 5px',
+  },
+  inputContainer: {
+    maxWidth: '350px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     marginBottom: 'calc(10px * var(--font-size-multiplier))',
   },
   incorrect: {

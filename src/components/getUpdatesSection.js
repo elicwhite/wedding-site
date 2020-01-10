@@ -130,7 +130,9 @@ function EmailForm({ cameFromEnterMore, onComplete }) {
 
   return (
     <form onSubmit={handleSubmit}>
+    <div style={styles.inputContainer}>
       {emailInput}
+      </div>
       <p
         style={{
           fontSize: '18px',
@@ -185,8 +187,13 @@ function Spinner() {
 
 const styles = {
   emailInput: {
-    width: '350px',
+    width: '100%',
     padding: '10px 20px 5px',
+  },
+  inputContainer: {
+    maxWidth: '350px',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     marginBottom: 'calc(10px * var(--font-size-multiplier))',
   },
   submit: {
