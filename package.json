@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Eli White <github@eli-white.com>",
   "dependencies": {
+    "@lottiefiles/lottie-player": "^0.3.0-rc2",
     "gatsby": "^2.17.6",
     "gatsby-image": "^2.2.30",
     "gatsby-plugin-layout": "^1.1.14",

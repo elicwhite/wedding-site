@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { navigate } from 'gatsby';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import './login.css';
+import '@lottiefiles/lottie-player';
 
 import { handleLogin } from '../services/auth';
 import SEO from '../components/seo';
@@ -12,6 +13,7 @@ const LoginPage = () => {
   const [enteredSuccessfully, setEnteredSuccessfully] = useState(null);
   const [password, passwordInput, passwordInputRef] = useInput({
     autoCapitalize: 'off',
+    autoComplete: 'off',
     placeholder: 'password',
     style: styles.input,
   });
@@ -74,17 +76,28 @@ const LoginPage = () => {
                     role="img"
                     aria-label="success"
                   >
-                    😍
+                    <lottie-player
+                      src="lf30_editor_IsTUTm.json"
+                      background="transparent"
+                      speed="1"
+                      style={{
+                        width: '300px',
+                        height: '300px',
+                      }}
+                      autoplay
+                    ></lottie-player>
                   </span>
                 ) : (
-                  passwordInput
+                  <div>
+                    {passwordInput}
+                    <p />
+                    <button type="submit" style={styles.submit}>
+                      Submit
+                    </button>
+                  </div>
                 )}
               </CSSTransition>
             </SwitchTransition>
-            <p />
-            <button type="submit" style={styles.submit}>
-              Submit
-            </button>
           </form>
 
           <p
