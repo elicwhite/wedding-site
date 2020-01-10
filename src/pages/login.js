@@ -7,12 +7,11 @@ import animationData from './lf30_editor_6vOhkS.json';
 
 import { handleLogin } from '../services/auth';
 import SEO from '../components/seo';
-import GetUpdatesSection from '../components/getUpdatesSection';
 import useInput from '../hooks/useInput';
 
 const LoginPage = () => {
   const [enteredSuccessfully, setEnteredSuccessfully] = useState(null);
-  const [password, passwordInput, passwordInputRef] = useInput({
+  const [password, passwordInput] = useInput({
     autoCapitalize: 'off',
     autoComplete: 'off',
     placeholder: 'password',

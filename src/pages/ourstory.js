@@ -155,6 +155,7 @@ const GalleryPage = () => {
             }}
           >
             <iframe
+            title="Eli's Proposal Video"
               style={{
                 position: 'absolute',
                 top: 0,

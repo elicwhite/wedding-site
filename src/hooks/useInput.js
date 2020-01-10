@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 
 export default function useInput(props = {}) {
   const [value, setValue] = useState('');
