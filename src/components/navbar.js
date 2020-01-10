@@ -77,18 +77,6 @@ function Links({ onClick = () => {} }) {
           RSVP
         </Link>
       </li>
-      <li style={styles.listItem}>
-        <Link
-          className="link"
-          style={styles.link}
-          activeStyle={styles.currentLink}
-          partiallyActive={true}
-          to="/login"
-          onClick={onClick}
-        >
-          Login
-        </Link>
-      </li>
     </>
   );
 }
