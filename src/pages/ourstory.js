@@ -134,7 +134,7 @@ const GalleryPage = () => {
           <SEO title="Home" />
           <h3 className="cursive">Engagement</h3>
           <div className="caps-subheader accent">September 7th 2019</div>
-          <p className="narrow-column">
+          <p>
             On their first night in Mallorca, Spain (Balearic Islands) after
             traveling to Poland and Germany - Holly and Eli had arranged to take
             a sunset hot air balloon ride. With some additional planning and a
@@ -173,11 +173,11 @@ const GalleryPage = () => {
       <div className="section">
         <div className="section-container">
           <h3 className="cursive">Travel</h3>
-          <div className="caps-subheader accent">
+          <div className="caps-subheader accent narrow-column">
             Austria, Denmark, England, France, Germany, Israel, Italy, Japan,
             Mexico, Poland, Spain
           </div>
-          <p className="narrow-column">
+          <p>
             Over the past 4 years Eli and Holly have been fortunate to be able
             to travel the world! So far they’ve been to 11 countries together!
             Inspired by Eli’s globetrotting past they’ve visited some familiar
@@ -197,7 +197,7 @@ const GalleryPage = () => {
         <div className="section-container">
           <h3 className="cursive">How We Met</h3>
           <div className="caps-subheader accent">September 2015</div>
-          <p className="narrow-column">
+          <p>
             Eli and Holly both came to the Bay Area to follow their careers in
             tech. They met through an online dating site and clicked right away
             after a chocolate fondue first date. Now, Eli works as a Software

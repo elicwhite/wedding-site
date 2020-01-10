@@ -5,7 +5,7 @@
 
 @media only screen and (max-width: 600px) {
   :root {
-    --font-size-multiplier: 0.7;
+    --font-size-multiplier: 0.81; /*0.7;*/
   }
 }
 
@@ -16,16 +16,16 @@ body {
 
 body {
   font-family: 'MrsEavesRoman';
-  font-size: 18px; /*calc(18px * var(--font-size-multiplier));*/
+  font-size: calc(22px * var(--font-size-multiplier));
 }
 
 .caps-subheader {
   font-family: 'MrsEavesAllPetiteCaps';
   font-size: calc(35px * var(--font-size-multiplier));
   font-weight: 400;
-  line-height: 1;
+  line-height: 1.45rem;
   letter-spacing: 1px;
-  margin-bottom: 1.45rem;
+  margin-bottom: 1rem;
 }
 
 .cursive {
@@ -37,7 +37,7 @@ body {
 h3.cursive {
   /* Was 48 before */
   font-size: calc(64px * var(--font-size-multiplier));
-  margin-bottom: calc(24px * var(--font-size-multiplier));
+  /* margin-bottom: calc(24px * var(--font-size-multiplier)); */
 }
 
 h4 {
@@ -75,7 +75,7 @@ h4 {
 }
 
 .narrow-column {
-  max-width: 600px;
+  max-width: 700px;
   margin-left: auto;
   margin-right: auto;
 }

@@ -91,7 +91,7 @@ const TravelPage = () => {
           <span>San Jose, CA</span>
           <p>
             Get the brisket, cornbread, and mac and cheese at this unassuming
-            BBQ joing.
+            BBQ joint.
             <br />
             Holly loves that you can request a "lean" cut of meat!
             <br />
@@ -104,7 +104,7 @@ const TravelPage = () => {
           <h4>Shalizaar</h4>
           <span>Belmont, CA</span>
           <p>
-            One of Eli's favorite places serving persion kabobs and delicious
+            One of Eli's favorite places serving persian kabobs and delicious
             fresh baked flatbread.
             <br />
             <a href="#" target="blank" className="accent">
