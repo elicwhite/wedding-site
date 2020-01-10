@@ -130,9 +130,7 @@ function EmailForm({ cameFromEnterMore, onComplete }) {
 
   return (
     <form onSubmit={handleSubmit}>
-    <div style={styles.inputContainer}>
-      {emailInput}
-      </div>
+      <div style={styles.inputContainer}>{emailInput}</div>
       <p
         style={{
           fontSize: '18px',

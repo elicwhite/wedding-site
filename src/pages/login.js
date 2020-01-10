@@ -45,82 +45,78 @@ const LoginPage = () => {
     <>
       <SEO title="Login" />
       <div className="section"></div>
-      <div className="section" style={{ marginTop: '1.5rem' }}>
-        <div
-          className="section-container narrow-column"
-          style={{ position: 'relative' }}
+      <SwitchTransition>
+        <CSSTransition
+          key={enteredSuccessfully === true ? 'success' : 'password'}
+          addEndListener={(node, done) =>
+            node.addEventListener('transitionend', done, false)
+          }
+          classNames="fade"
         >
-          <h3 className="cursive">Welcome</h3>
-          <p
-            style={{
-              marginBottom: 'calc(24px * var(--font-size-multiplier))',
-            }}
-          >
-            Please enter the password from your Save the Date postcard for
-            access to wedding details.
-          </p>
-          <form onSubmit={handleSubmit}>
-            <SwitchTransition>
-              <CSSTransition
-                key={enteredSuccessfully === true ? 'success' : 'password'}
-                addEndListener={(node, done) =>
-                  node.addEventListener('transitionend', done, false)
-                }
-                classNames="fade"
+          {enteredSuccessfully ? (
+            <div style={{ marginTop: '50px' }}>
+              <Lottie
+                options={{
+                  autoplay: true,
+                  loop: false,
+                  animationData: animationData,
+                  rendererSettings: {
+                    preserveAspectRatio: 'xMidYMid slice',
+                  },
+                }}
+                height={200}
+                width={200}
+                eventListeners={[
+                  {
+                    eventName: 'complete',
+                    callback: () => navigate(`/`),
+                  },
+                ]}
+              />
+            </div>
+          ) : (
+            <div className="section" style={{ marginTop: '1.5rem' }}>
+              <div
+                className="section-container narrow-column"
+                style={{ position: 'relative' }}
               >
-                {enteredSuccessfully ? (
-                  <span
-                    style={{
-                      fontSize: 60,
-                      verticalAlign: 'text-top',
-                    }}
-                    role="img"
-                    aria-label="success"
-                  >
-                    <Lottie
-                      options={{
-                        autoplay: true,
-                        loop: false,
-                        animationData: animationData,
-                        rendererSettings: {
-                          preserveAspectRatio: 'xMidYMid slice',
-                        },
+                <div>
+                  <>
+                    <h3 className="cursive">Welcome</h3>
+                    <p
+                      style={{
+                        marginBottom:
+                          'calc(24px * var(--font-size-multiplier))',
                       }}
-                      height={300}
-                      width={300}
-                      eventListeners={[
-                        {
-                          eventName: 'complete',
-                          callback: () => navigate(`/`),
-                        },
-                      ]}
-                    />
-                  </span>
-                ) : (
-                  <div>
-                    <div style={styles.inputContainer}>
-                      {passwordInput}
-                    </div>
-                    <p />
-                    <button type="submit" style={styles.submit}>
-                      Submit
-                    </button>
-                  </div>
-                )}
-              </CSSTransition>
-            </SwitchTransition>
-          </form>
+                    >
+                      Please enter the password from your Save the Date postcard
+                      for access to wedding details.
+                    </p>
+                    <form onSubmit={handleSubmit}>
+                      <div>
+                        <div style={styles.inputContainer}>{passwordInput}</div>
+                        <p />
+                        <button type="submit" style={styles.submit}>
+                          Submit
+                        </button>
+                      </div>
+                    </form>
 
-          <p
-            className={`accent fade ${
-              enteredSuccessfully === false ? 'fade-active' : ''
-            }`}
-            style={styles.incorrect}
-          >
-            Whoops! You've entered the wrong password.
-          </p>
-        </div>
-      </div>
+                    <p
+                      className={`accent fade ${
+                        enteredSuccessfully === false ? 'fade-active' : ''
+                      }`}
+                      style={styles.incorrect}
+                    >
+                      Whoops! You've entered the wrong password.
+                    </p>
+                  </>
+                </div>
+              </div>
+            </div>
+          )}
+        </CSSTransition>
+      </SwitchTransition>
     </>
   );
 };
