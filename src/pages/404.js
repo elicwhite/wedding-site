@@ -6,8 +6,8 @@ const NotFoundPage = () => (
   <div className="section">
     <div className="section-container">
       <SEO title="404: Not found" />
-      <h1>NOT FOUND</h1>
-      <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+      <h3 className="cursive">Oops</h3>
+      <p>This page does not exist!</p>
     </div>
   </div>
 );
