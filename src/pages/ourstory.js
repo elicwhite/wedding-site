@@ -155,13 +155,14 @@ const GalleryPage = () => {
           </p>
           <p>
             Just before the Bay Area’s shelter in place order we took some
-            photos to document and celebrate our engagement -- here are some of
-            our favorites. Although our wedding is a bit further away now, we
-            are finding joy in some unexpected quality time, and really getting
-            some mileage out of the title fiancé! We are so looking forward to
-            seeing everyone in person and celebrating our love in a way that
-            shows love to our guests by postponing. We are hoping and planning
-            that this will be with all of you on August 28, 2021!
+            photos to document and celebrate our engagement &mdash; here are
+            some of our favorites. Although our wedding is a bit further away
+            now, we are finding joy in some unexpected quality time, and really
+            getting some mileage out of the title fiancé! We are so looking
+            forward to getting to see everyone in person and celebrating our
+            love in an environment where we can all feel comfortable being
+            together. We are hoping and planning that this will be with all of
+            you on August 28, 2021!
           </p>
 
           <Gallery
@@ -178,10 +179,10 @@ const GalleryPage = () => {
           <div className="caps-subheader accent">September 7th 2019</div>
           <p>
             On our first night in Mallorca, Spain (Balearic Islands) after
-            traveling to Poland and Germany - we had arranged to take a sunset
-            hot air balloon ride. With some additional planning and a gorgeous
-            ring he picked himself, Eli turned this outing into a perfect
-            surprise proposal!
+            traveling to Poland and Germany &mdash; we had arranged to take a
+            sunset hot air balloon ride. With some additional planning and a
+            gorgeous ring he picked himself, Eli turned this outing into a
+            perfect surprise proposal!
           </p>
           <Gallery
             photos={engagementPreviewPhotos}

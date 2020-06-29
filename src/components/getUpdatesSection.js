@@ -86,7 +86,8 @@ function SuccessMessage({ onEnterMore }) {
           fontSize: '18px',
         }}
       >
-        Can’t find the welcome email? Look for something from hollyandeli@gmail.com
+        Can’t find the welcome email? Look for something from
+        hollyandeli@gmail.com
       </p>
     </>
   );
