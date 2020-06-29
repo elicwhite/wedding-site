@@ -32,8 +32,8 @@ const IndexPage = () => {
           <div className="shadow-frame">
             <Image />
           </div>
-          <h3 className="cursive">Save Our Date</h3>
-          <div className="caps-subheader">September 12th, 2020</div>
+          <h3 className="cursive">Save Our New Date</h3>
+          <div className="caps-subheader">August 28th, 2021</div>
         </div>
       </div>
 

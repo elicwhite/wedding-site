@@ -32,7 +32,7 @@ const WeddingPage = () => {
         </div>
         <div style={styles.flex}>
           <p>
-            September 12th, 2020
+            August 28th, 2021
             <br />
             8 N San Pedro St #300
             <br />

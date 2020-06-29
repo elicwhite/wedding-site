@@ -24,6 +24,13 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
+        name: `engagement2`,
+        path: `${__dirname}/src/images/engagement2`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
         name: `travel`,
         path: `${__dirname}/src/images/travel`,
       },

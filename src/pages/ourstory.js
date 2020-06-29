@@ -82,6 +82,16 @@ const GalleryPage = () => {
         }
       }
 
+      engagement2: allFile(
+        filter: { sourceInstanceName: { eq: "engagement2" } }
+      ) {
+        edges {
+          node {
+            ...PhotoImage
+          }
+        }
+      }
+
       travel: allFile(filter: { sourceInstanceName: { eq: "travel" } }) {
         edges {
           node {
@@ -103,6 +113,9 @@ const GalleryPage = () => {
   const [engagementPreviewPhotos, engagementFullscreenPhotos] = getPhotos(
     data2.engagement
   );
+  const [engagement2PreviewPhotos, engagement2FullscreenPhotos] = getPhotos(
+    data2.engagement2
+  );
   const [travelPreviewPhotos, travelFullscreenPhotos] = getPhotos(data2.travel);
   const [howwemetPreviewPhotos, howwemetFullscreenPhotos] = getPhotos(
     data2.howwemet
@@ -110,7 +123,7 @@ const GalleryPage = () => {
 
   const [currentImage, setCurrentImage] = useState(0);
   const [fullscreenPhotos, setFullscreenPhotos] = useState(
-    engagementFullscreenPhotos
+    engagement2FullscreenPhotos
   );
   const [viewerIsOpen, setViewerIsOpen] = useState(false);
 
@@ -129,17 +142,46 @@ const GalleryPage = () => {
 
   return (
     <>
+      <SEO title="Home" />
       <div className="section">
         <div className="section-container">
-          <SEO title="Home" />
+          <h3 className="cursive">Pandemic?!</h3>
+          <div className="caps-subheader accent">March 2020 - Unknown</div>
+          <p>
+            Well this wasn’t part of the plan! Due to the COVID-19 pandemic
+            we’ve decided to postpone our wedding until 2021. We hope that
+            everyone is staying home, wearing a mask when going out, and staying
+            healthy.
+          </p>
+          <p>
+            Just before the Bay Area’s shelter in place order we took some
+            photos to document and celebrate our engagement -- here are some of
+            our favorites. Although our wedding is a bit further away now, we
+            are finding joy in some unexpected quality time, and really getting
+            some mileage out of the title fiancé! We are so looking forward to
+            seeing everyone in person and celebrating our love in a way that
+            shows love to our guests by postponing. We are hoping and planning
+            that this will be with all of you on August 28, 2021!
+          </p>
+
+          <Gallery
+            photos={engagement2PreviewPhotos}
+            renderImage={GalleryImage}
+            onClick={openLightbox.bind(null, engagement2FullscreenPhotos)}
+            margin={MARGIN}
+          />
+        </div>
+      </div>
+      <div className="section">
+        <div className="section-container">
           <h3 className="cursive">Engagement</h3>
           <div className="caps-subheader accent">September 7th 2019</div>
           <p>
-            On their first night in Mallorca, Spain (Balearic Islands) after
-            traveling to Poland and Germany - Holly and Eli had arranged to take
-            a sunset hot air balloon ride. With some additional planning and a
-            gorgeous ring he picked himself, Eli turned this outing into a
-            perfect surprise proposal!
+            On our first night in Mallorca, Spain (Balearic Islands) after
+            traveling to Poland and Germany - we had arranged to take a sunset
+            hot air balloon ride. With some additional planning and a gorgeous
+            ring he picked himself, Eli turned this outing into a perfect
+            surprise proposal!
           </p>
           <Gallery
             photos={engagementPreviewPhotos}
@@ -155,7 +197,7 @@ const GalleryPage = () => {
             }}
           >
             <iframe
-            title="Eli's Proposal Video"
+              title="Eli's Proposal Video"
               style={{
                 position: 'absolute',
                 top: 0,
@@ -179,12 +221,12 @@ const GalleryPage = () => {
             Mexico, Poland, Spain
           </div>
           <p>
-            Over the past 4 years Eli and Holly have been fortunate to be able
-            to travel the world! So far they’ve been to 11 countries together!
-            Inspired by Eli’s globetrotting past they’ve visited some familiar
-            locations and many new ones and have enjoyed sharing these
-            experiences with each other. They look forward to seeing some
-            exciting new destinations in 2020.
+            Over the past 4 years we have been fortunate to be able to travel
+            the world! So far we’ve been to 11 countries together! Inspired by
+            Eli’s globetrotting past we’ve visited some familiar locations, and
+            many new ones, and have enjoyed sharing these experiences with each
+            other. We look forward to seeing some exciting new destinations in
+            2021 and beyond.
           </p>
           <Gallery
             photos={travelPreviewPhotos}
@@ -199,12 +241,12 @@ const GalleryPage = () => {
           <h3 className="cursive">How We Met</h3>
           <div className="caps-subheader accent">September 2015</div>
           <p>
-            Eli and Holly both came to the Bay Area to follow their careers in
-            tech. They met through an online dating site and clicked right away
-            after a chocolate fondue first date. Now, Eli works as a Software
-            Engineer on the React Native Team at Facebook and Holly works as a
-            User Experience Software Engineer on internal tools at Apple.
-            Together, they built and designed this website!
+            We both came to the Bay Area to follow our careers in tech. We met
+            through an online dating site and clicked right away after a
+            chocolate fondue first date. Now, Eli works as a Software
+            Engineering Manager on the React Native Team at Facebook and Holly
+            works as a User Experience Engineering Manager on internal tools at
+            Apple. Together, we built and designed this website!
           </p>
           <Gallery
             photos={howwemetPreviewPhotos}

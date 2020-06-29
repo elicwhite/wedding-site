@@ -21,7 +21,10 @@ const LoginPage = () => {
 
   useEffect(() => {
     // When one character is entered, reset this state
-    if (enteredSuccessfully === false && previousPassword.current !== password) {
+    if (
+      enteredSuccessfully === false &&
+      previousPassword.current !== password
+    ) {
       setEnteredSuccessfully(null);
     }
 

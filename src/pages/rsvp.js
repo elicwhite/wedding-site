@@ -58,8 +58,8 @@ const RSVPPage = () => {
       <div className="caps-subheader accent">We're going to miss you!</div>
       <p>
         It will greatly help with our planning to know if you are unable to
-        attend. If you already know about a conflict kindly send your regrets via
-        email to{' '}
+        attend. If you already know about a conflict kindly send your regrets
+        via email to{' '}
         <a className="accent" href="mailto:hollyandeli@gmail.com">
           hollyandeli@gmail.com
         </a>

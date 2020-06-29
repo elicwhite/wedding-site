@@ -70,6 +70,7 @@ function SuccessMessage({ onEnterMore }) {
       >
         You're on our list.
       </p>
+
       <a
         href="#"
         className="enter-another-email"
@@ -78,8 +79,15 @@ function SuccessMessage({ onEnterMore }) {
           onEnterMore();
         }}
       >
-        want updates sent to an additional email address? click here.
+        Want updates sent to an additional email address? Click here.
       </a>
+      <p
+        style={{
+          fontSize: '18px',
+        }}
+      >
+        Can’t find the welcome email? Look for something from hollyandeli@gmail.com
+      </p>
     </>
   );
 }
