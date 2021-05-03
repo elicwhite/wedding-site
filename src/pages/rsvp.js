@@ -6,6 +6,7 @@ import ComingSoon from '../components/comingSoon';
 import RSVP_GROUP_DATA from './rsvp_data.json';
 import useInput from '../hooks/useInput';
 import Spinner from '../components/spinner';
+import { SwitchTransition, CSSTransition } from 'react-transition-group';
 
 import { withPrivateRoute } from '../components/privateRoute';
 
@@ -74,8 +75,11 @@ function RSVPForm() {
   const [previouslySubmitted, setPreviouslySubmitted] = useState(null);
   const [submitted, setSubmitted] = useState(false);
 
+  let content = null;
+  let contentKey = null;
   if (rsvpGroup == null) {
-    return (
+    contentKey = 'find-name';
+    content = (
       <FindNameOnGuestList
         onGroupFound={(group, alreadySubmitted) => {
           setPreviouslySubmitted(alreadySubmitted);
@@ -84,12 +88,14 @@ function RSVPForm() {
       />
     );
   } else if (previouslySubmitted) {
-    return <AlreadySubmitted />;
+    contentKey = 'already-submitted';
+    content = <AlreadySubmitted />;
   } else if (submitted) {
-    return <RSVPSubmittedSuccessfully />;
+    contentKey = 'submitted-successfully';
+    content = <RSVPSubmittedSuccessfully />;
   } else {
-    console.log('enter details', rsvpGroup);
-    return (
+    contentKey = 'enter-details';
+    content = (
       <EnterDetails
         group={rsvpGroup}
         onSubmit={() => {
@@ -98,6 +104,30 @@ function RSVPForm() {
       />
     );
   }
+
+  return (
+    <>
+      <div className="section">
+        <div className="section-container">
+          <h3 className="cursive">RSVP</h3>
+          <div className="caps-subheader accent">
+            Let us know if you'll be attending!
+          </div>
+        </div>
+      </div>
+      <SwitchTransition>
+        <CSSTransition
+          key={contentKey}
+          addEndListener={(node, done) =>
+            node.addEventListener('transitionend', done, false)
+          }
+          classNames="fade"
+        >
+          {content}
+        </CSSTransition>
+      </SwitchTransition>
+    </>
+  );
 }
 
 function FindNameOnGuestList({ onGroupFound }) {
@@ -109,6 +139,10 @@ function FindNameOnGuestList({ onGroupFound }) {
   const [fetchingStatus, setFetchingStatus] = useState(null);
 
   useEffect(() => {
+    if (!group) {
+      return;
+    }
+
     let expired = false;
 
     function reportAlreadySubmitted(alreadySubmitted) {
@@ -181,44 +215,51 @@ function FindNameOnGuestList({ onGroupFound }) {
   );
 
   return (
-    <>
-      <div className="invert-sections">
-        <div className="section">
-          <div className="section-container narrow-column">
-            <p>
-              Please submit your RSVP by July 28th. If you are unable to use the
-              website you may{' '}
-              <a className="accent" href="mailto:hollyandeli@gmail.com">
-                email us
-              </a>{' '}
-              or give us a call.
-            </p>
-          </div>
-        </div>
-        <div className="section">
-          <div className="section-container narrow-column">
-            <h3 className="cursive">RSVP</h3>
-            <p>
-              Enter any name listed on your invitation to find your information.
-            </p>
-            <form onSubmit={handleSubmit}>
-              {group === false ? (
-                <>
-                  <h3>Name not found on the guest list</h3>
-                  <p>
-                    If you this is in error{' '}
-                    <a href="mailto:hollyandeli@gmail.com">email us.</a>
-                  </p>
-                </>
-              ) : null}
-              <div>{nameInput}</div>
-
-              {submitOrSpinner}
-            </form>
-          </div>
+    <div>
+      <div className="section">
+        <div className="section-container narrow-column">
+          <p>
+            Please submit your RSVP by July 28th. If you are unable to use the
+            website you may{' '}
+            <a className="accent" href="mailto:hollyandeli@gmail.com">
+              email us
+            </a>{' '}
+            or give us a call.
+          </p>
         </div>
       </div>
-    </>
+      <div className="section">
+        <div className="section-container narrow-column">
+          <p>
+            Enter any name listed on your invitation to find your information.
+          </p>
+          <form onSubmit={handleSubmit}>
+            {group === false ? (
+              <>
+                <h3>Name not found on the guest list</h3>
+                <p>
+                  If you this is in error{' '}
+                  <a href="mailto:hollyandeli@gmail.com">email us.</a>
+                </p>
+              </>
+            ) : null}
+            <div>{nameInput}</div>
+
+            <SwitchTransition>
+              <CSSTransition
+                key={fetchingStatus ? 'checking' : 'not checking'}
+                addEndListener={(node, done) =>
+                  node.addEventListener('transitionend', done, false)
+                }
+                classNames="fade-fast"
+              >
+                {submitOrSpinner}
+              </CSSTransition>
+            </SwitchTransition>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
 
