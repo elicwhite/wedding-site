@@ -12,7 +12,7 @@ import { withPrivateRoute } from '../components/privateRoute';
 
 const URL =
   'https://script.google.com/macros/s/AKfycbytK-1S588_Z4M4MzV8M-nlyHKNargj6EXwtmPfIO3gZ-CpMBJo-3kEdDWj0wmZYqWhIw/exec';
-const SHOW_RSVP = false;
+const SHOW_RSVP = true;
 
 /*
 thoughts
@@ -298,6 +298,19 @@ function EnterDetails({ group, onSubmit }) {
             };
           }),
         };
+      } else if (action.type === 'guest-vaccinated') {
+        return {
+          ...state,
+          guests: state.guests.map(guest => {
+            return {
+              ...guest,
+              vaccinated:
+                guest.guestIndex === action.guestIndex
+                  ? action.value
+                  : guest.vaccinated,
+            };
+          }),
+        };
       } else if (action.type === 'dinner') {
         return {
           ...state,
@@ -306,6 +319,19 @@ function EnterDetails({ group, onSubmit }) {
               ...person,
               dinner:
                 person.name === action.name ? action.value : person.dinner,
+            };
+          }),
+        };
+      } else if (action.type === 'guest-dinner') {
+        return {
+          ...state,
+          guests: state.guests.map(guest => {
+            return {
+              ...guest,
+              dinner:
+                guest.guestIndex === action.guestIndex
+                  ? action.value
+                  : guest.dinner,
             };
           }),
         };
@@ -330,6 +356,23 @@ function EnterDetails({ group, onSubmit }) {
       } else if (action.type === 'validate') {
         console.log('validate');
 
+        const attendingErrors = state.people
+          .map(person => {
+            if (person.attending === 'choose') {
+              return `attending-${person.name}`;
+            }
+            return null;
+          })
+          .concat(
+            state.guests.map(guest => {
+              if (guest.attending === 'choose') {
+                return `attending-${guest.guestIndex}`;
+              }
+
+              return null;
+            })
+          );
+
         const vaccinationErrors = state.people
           .map(person => {
             if (
@@ -338,6 +381,8 @@ function EnterDetails({ group, onSubmit }) {
             ) {
               return `vaccinated-${person.name}`;
             }
+
+            return null;
           })
           .concat(
             state.guests.map(guest => {
@@ -347,6 +392,8 @@ function EnterDetails({ group, onSubmit }) {
               ) {
                 return `vaccinated-${guest.guestIndex}`;
               }
+
+              return null;
             })
           );
 
@@ -355,22 +402,39 @@ function EnterDetails({ group, onSubmit }) {
             if (person.attending === 'attending' && person.dinner === 'none') {
               return `dinner-${person.name}`;
             }
+
+            return null;
           })
           .concat(
             state.guests.map(guest => {
               if (guest.attending === 'attending' && guest.dinner === 'none') {
                 return `dinner-${guest.guestIndex}`;
               }
+
+              return null;
             })
           );
+
+        const guestNameErrors = state.guests.map(guest => {
+          if (
+            guest.attending === 'attending' &&
+            (guest.name === null || guest.name.trim() === '')
+          ) {
+            return `guestname-${guest.guestIndex}`;
+          }
+
+          return null;
+        });
 
         const emailError =
           state.groupEmail === null || state.groupEmail.trim() === ''
             ? 'email'
             : null;
 
-        const errors = vaccinationErrors
+        const errors = attendingErrors
+          .concat(vaccinationErrors)
           .concat(dinnerErrors)
+          .concat(guestNameErrors)
           .concat([emailError])
           .filter(Boolean);
 
@@ -388,7 +452,7 @@ function EnterDetails({ group, onSubmit }) {
       people: group.names.map(name => {
         return {
           name,
-          attending: 'notattending',
+          attending: 'choose',
           vaccinated: false,
           dinner: 'none',
         };
@@ -400,7 +464,7 @@ function EnterDetails({ group, onSubmit }) {
               return {
                 guestIndex,
                 name: null,
-                attending: 'notattending',
+                attending: 'choose',
                 vaccinated: false,
                 dinner: 'none',
               };
@@ -437,8 +501,13 @@ function EnterDetails({ group, onSubmit }) {
           name: guest.name,
           groupEmail: state.groupEmail,
           attending: guest.attending === 'attending' ? 'yes' : 'no',
-          dinner: guest.dinner,
           guestOf: state.people[0].name,
+          ...(guest.attending === 'attending'
+            ? {
+                dinner: guest.dinner,
+                vaccinated: guest.vaccinated ? 'yes' : 'no',
+              }
+            : null),
         }))
       );
 
@@ -484,10 +553,17 @@ function EnterDetails({ group, onSubmit }) {
                         });
                       }}
                     >
+                      <option value="choose">Attending?</option>
                       <option value="attending">Will Attend</option>
                       <option value="notattending">Regretfully Declines</option>
                     </select>
                   </label>
+
+                  {(state.errors || []).includes(`attending-${person.name}`) ? (
+                    <div>
+                      <span style={styles.error}>*required</span>
+                    </div>
+                  ) : null}
                 </div>
                 <SwitchTransition>
                   <CSSTransition
@@ -586,33 +662,157 @@ function EnterDetails({ group, onSubmit }) {
 
           {state.guests.map(guest => {
             return (
-              <div key={guest.guestIndex}>
-                <input
-                  type="text"
-                  value={guest.name || ''}
-                  placeholder="Guest Name"
-                  onChange={e => {
-                    dispatch({
-                      type: 'guest-name',
-                      guestIndex: guest.guestIndex,
-                      name: e.target.value,
-                    });
-                  }}
-                />
-                <label>
-                  Attending
-                  <input
-                    type="checkbox"
-                    checked={guest.attending}
-                    onChange={e => {
-                      dispatch({
-                        type: 'guest-attending',
-                        guestIndex: guest.guestIndex,
-                        value: e.target.checked,
-                      });
-                    }}
-                  />
-                </label>
+              <div key={guest.guestIndex} style={styles.personSection}>
+                <h4 style={styles.nameHeader}>Guest</h4>
+
+                <div style={styles.selectionWrapper}>
+                  <label>
+                    <div className="accent caps-subheader">Response</div>
+
+                    <select
+                      style={styles.selectInput}
+                      value={guest.attending}
+                      onChange={e => {
+                        dispatch({
+                          type: 'guest-attending',
+                          guestIndex: guest.guestIndex,
+                          value: e.target.value,
+                        });
+                      }}
+                    >
+                      <option value="choose">Attending?</option>
+                      <option value="attending">Bringing a Guest</option>
+                      <option value="notattending">Not Bringing a Guest</option>
+                    </select>
+                  </label>
+
+                  {(state.errors || []).includes(
+                    `attending-${guest.guestIndex}`
+                  ) ? (
+                    <div>
+                      <span style={styles.error}>*required</span>
+                    </div>
+                  ) : null}
+                </div>
+                <SwitchTransition>
+                  <CSSTransition
+                    key={`${guest.guestIndex}-${guest.attending}`}
+                    addEndListener={(node, done) =>
+                      node.addEventListener('transitionend', done, false)
+                    }
+                    classNames="fade-fast"
+                  >
+                    {guest.attending === 'attending' ? (
+                      <div>
+                        <div style={styles.selectionWrapper}>
+                          <label>
+                            <div className="accent caps-subheader">
+                              Guest's Name
+                            </div>
+
+                            <input
+                              style={styles.input}
+                              type="text"
+                              value={guest.name || ''}
+                              placeholder="First and last name"
+                              onChange={e => {
+                                dispatch({
+                                  type: 'guest-name',
+                                  guestIndex: guest.guestIndex,
+                                  name: e.target.value,
+                                });
+                              }}
+                            />
+                          </label>
+
+                          {(state.errors || []).includes(
+                            `guestname-${guest.guestIndex}`
+                          ) ? (
+                            <div>
+                              <span style={styles.error}>*required</span>
+                            </div>
+                          ) : null}
+                        </div>
+                        <div style={styles.selectionWrapper}>
+                          <label>
+                            <div className="accent caps-subheader">
+                              Dinner Selection
+                            </div>
+
+                            <select
+                              style={styles.selectInput}
+                              value={guest.dinner}
+                              onChange={e => {
+                                dispatch({
+                                  type: 'guest-dinner',
+                                  guestIndex: guest.guestIndex,
+                                  value: e.target.value,
+                                });
+                              }}
+                            >
+                              <option value="none">Select a meal</option>
+                              <option value="beef">Beef</option>
+                              <option value="chicken">Chicken</option>
+                              <option value="veggie">Vegetarian</option>
+                            </select>
+                          </label>
+
+                          {(state.errors || []).includes(
+                            `dinner-${guest.guestIndex}`
+                          ) ? (
+                            <div>
+                              <span style={styles.error}>*required</span>
+                            </div>
+                          ) : null}
+                        </div>
+                        <div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <input
+                            id={`${guest.guestIndex} vax`}
+                            style={{
+                              marginTop: '.2em',
+                            }}
+                            type="checkbox"
+                            checked={guest.vaccinated}
+                            onChange={e => {
+                              dispatch({
+                                type: 'guest-vaccinated',
+                                guestIndex: guest.guestIndex,
+                                value: e.target.checked,
+                              });
+                            }}
+                          />
+                          <label
+                            htmlFor={`${guest.guestIndex} vax`}
+                            style={{
+                              textAlign: 'left',
+                              marginLeft: '.5em',
+                            }}
+                          >
+                            Guest will be fully vaccinated as{' '}
+                            <a href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html">
+                              defined by the CDC
+                            </a>{' '}
+                            before 8.28.21. I understand that this is a
+                            requirement for attending.
+                          </label>
+                        </div>
+                        {(state.errors || []).includes(
+                          `vaccinated-${guest.guestIndex}`
+                        ) ? (
+                          <span style={styles.error}>*required</span>
+                        ) : null}
+                      </div>
+                    ) : (
+                      <div />
+                    )}
+                  </CSSTransition>
+                </SwitchTransition>
               </div>
             );
           })}
@@ -695,7 +895,6 @@ const styles = {
     marginBottom: '10px',
   },
   selectInput: {
-    border: 'none',
     padding: '.5em 3em .25em 1em',
     boxShadow: '0px 2px 10px #aaa',
     border: '1px solid #eaeaea',
