@@ -4,12 +4,14 @@ import SEO from '../components/seo';
 import GetUpdatesSection from '../components/getUpdatesSection';
 import ComingSoon from '../components/comingSoon';
 import RSVP_GROUP_DATA from './rsvp_data.json';
+import useInput from '../hooks/useInput';
+import Spinner from '../components/spinner';
 
 import { withPrivateRoute } from '../components/privateRoute';
 
 const URL =
   'https://script.google.com/macros/s/AKfycbytK-1S588_Z4M4MzV8M-nlyHKNargj6EXwtmPfIO3gZ-CpMBJo-3kEdDWj0wmZYqWhIw/exec';
-const SHOW_RSVP = true;
+const SHOW_RSVP = false;
 
 /*
 thoughts
@@ -18,15 +20,6 @@ matching lower case names. Fuzzy?
 Check if already submitted from google sheet?
 Email validation?
 */
-
-function useInput() {
-  const [value, setValue] = useState('');
-  const input = (
-    <input type="text" onChange={e => setValue(e.target.value)} value={value} />
-  );
-
-  return [value, input];
-}
 
 function findGroup(name) {
   return RSVP_GROUP_DATA.find(group => {
@@ -41,34 +34,36 @@ const RSVPPage = () => {
     <RSVPForm />
   ) : (
     <>
-      <h3 className="cursive">Can't Attend?</h3>
-      <div className="caps-subheader accent">We're going to miss you!</div>
-      <p>
-        It will greatly help with our planning to know if you are unable to
-        attend. If you already know about a conflict kindly send your regrets
-        via email to{' '}
-        <a className="accent" href="mailto:hollyandeli@gmail.com">
-          hollyandeli@gmail.com
-        </a>
-        .
-      </p>
-      <p>
-        Excited to let us know you’re coming, or still unsure of your plans?
-        You’ve still got time to figure it out - online RSVP will open at a
-        later date.
-      </p>
+      <div className="section">
+        <div className="section-container narrow-column">
+          <h3 className="cursive">Can't Attend?</h3>
+          <div className="caps-subheader accent">We're going to miss you!</div>
+          <p>
+            It will greatly help with our planning to know if you are unable to
+            attend. If you already know about a conflict kindly send your
+            regrets via email to{' '}
+            <a className="accent" href="mailto:hollyandeli@gmail.com">
+              hollyandeli@gmail.com
+            </a>
+            .
+          </p>
+          <p>
+            Excited to let us know you’re coming, or still unsure of your plans?
+            You’ve still got time to figure it out - online RSVP will open at a
+            later date.
+          </p>
 
-      <h3 className="cursive">RSVP</h3>
-      <ComingSoon />
+          <h3 className="cursive">RSVP</h3>
+          <ComingSoon />
+        </div>
+      </div>
     </>
   );
 
   return (
     <>
       <SEO title="RSVP" />
-      <div className="section">
-        <div className="section-container narrow-column">{content}</div>
-      </div>
+      {content}
       {SHOW_RSVP ? null : <GetUpdatesSection />}
     </>
   );
@@ -106,7 +101,10 @@ function RSVPForm() {
 }
 
 function FindNameOnGuestList({ onGroupFound }) {
-  const [name, nameInput] = useInput();
+  const [name, nameInput] = useInput({
+    placeholder: 'First and last name',
+    style: styles.input,
+  });
   const [group, setGroup] = useState(null);
   const [fetchingStatus, setFetchingStatus] = useState(null);
 
@@ -174,28 +172,52 @@ function FindNameOnGuestList({ onGroupFound }) {
     }
   };
 
+  const submitOrSpinner = fetchingStatus ? (
+    <Spinner />
+  ) : (
+    <button type="submit" className="submit-button">
+      Start Lookup
+    </button>
+  );
+
   return (
     <>
-      <h3>Name</h3>
-      <form onSubmit={handleSubmit}>
-        {group === false ? (
-          <>
-            <h3>Name not found on the guest list</h3>
+      <div className="invert-sections">
+        <div className="section">
+          <div className="section-container narrow-column">
             <p>
-              If you this is in error{' '}
-              <a href="mailto:hollyandeli@gmail.com">email us.</a>
+              Please submit your RSVP by July 28th. If you are unable to use the
+              website you may{' '}
+              <a className="accent" href="mailto:hollyandeli@gmail.com">
+                email us
+              </a>{' '}
+              or give us a call.
             </p>
-          </>
-        ) : null}
-        <div>{nameInput}</div>
+          </div>
+        </div>
+        <div className="section">
+          <div className="section-container narrow-column">
+            <h3 className="cursive">RSVP</h3>
+            <p>
+              Enter any name listed on your invitation to find your information.
+            </p>
+            <form onSubmit={handleSubmit}>
+              {group === false ? (
+                <>
+                  <h3>Name not found on the guest list</h3>
+                  <p>
+                    If you this is in error{' '}
+                    <a href="mailto:hollyandeli@gmail.com">email us.</a>
+                  </p>
+                </>
+              ) : null}
+              <div>{nameInput}</div>
 
-        <input
-          type="submit"
-          value="Submit"
-          disabled={fetchingStatus === true}
-        />
-        {fetchingStatus && 'spinner'}
-      </form>
+              {submitOrSpinner}
+            </form>
+          </div>
+        </div>
+      </div>
     </>
   );
 }
@@ -402,5 +424,14 @@ function RSVPSubmittedSuccessfully() {
     </>
   );
 }
+
+const styles = {
+  input: {
+    padding: '10px 20px 5px',
+    boxShadow: '0px 2px 10px #aaa',
+    border: '1px solid #eaeaea',
+    marginBottom: '30px',
+  },
+};
 
 export default withPrivateRoute(RSVPPage);

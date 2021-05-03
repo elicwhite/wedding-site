@@ -70,6 +70,20 @@ h4 {
   background-color: #f2f2f2;
 }
 
+.invert-section:nth-child(even) .section-container {
+  background-color: transparent;
+}
+
+.invert-sections .section:nth-child(even),
+.invert-sections .section:nth-child(even) .section-container {
+  background-color: transparent;
+}
+
+.invert-sections .section:nth-child(odd),
+.invert-sections .section:nth-child(odd) .section-container {
+  background-color: #f2f2f2;
+}
+
 .accent {
   color: var(--accent-color);
 }
@@ -122,4 +136,13 @@ h4 {
 .fade-fast-enter-active,
 .fade-fast-exit-active {
   transition: opacity 200ms;
+}
+
+.submit-button {
+  font-family: MrsEavesAllPetiteCaps;
+  background-color: var(--accent-color);
+  color: white;
+  padding: 10px 55px 5px;
+  font-size: 28px;
+  border: 0px;
 }
