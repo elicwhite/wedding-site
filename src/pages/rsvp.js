@@ -108,11 +108,9 @@ function RSVPForm() {
   return (
     <>
       <div className="section">
-        <div className="section-container">
+        <div className="section-container" style={{ paddingBottom: '0px' }}>
           <h3 className="cursive">RSVP</h3>
-          <div className="caps-subheader accent">
-            Let us know if you'll be attending!
-          </div>
+          <div className="caps-subheader accent">On or before July 17</div>
         </div>
       </div>
       <SwitchTransition>
@@ -219,18 +217,6 @@ function FindNameOnGuestList({ onGroupFound }) {
       <div className="section">
         <div className="section-container narrow-column">
           <p>
-            Please submit your RSVP by July 28th. If you are unable to use the
-            website you may{' '}
-            <a className="accent" href="mailto:hollyandeli@gmail.com">
-              email us
-            </a>{' '}
-            or give us a call.
-          </p>
-        </div>
-      </div>
-      <div className="section">
-        <div className="section-container narrow-column">
-          <p>
             Enter any name listed on your invitation to find your information.
           </p>
           <form onSubmit={handleSubmit}>
@@ -257,6 +243,17 @@ function FindNameOnGuestList({ onGroupFound }) {
               </CSSTransition>
             </SwitchTransition>
           </form>
+        </div>
+      </div>
+      <div className="section">
+        <div className="section-container narrow-column">
+          <p style={{ marginBottom: '0px' }}>
+            If you are unable to use the website you may{' '}
+            <a className="accent" href="mailto:hollyandeli@gmail.com">
+              email us
+            </a>{' '}
+            or give us a call.
+          </p>
         </div>
       </div>
     </div>
@@ -290,6 +287,28 @@ function EnterDetails({ group, onSubmit }) {
             };
           }),
         };
+      } else if (action.type === 'person-vaccinated') {
+        return {
+          ...state,
+          people: state.people.map(person => {
+            return {
+              ...person,
+              vaccinated:
+                person.name === action.name ? action.value : person.vaccinated,
+            };
+          }),
+        };
+      } else if (action.type === 'dinner') {
+        return {
+          ...state,
+          people: state.people.map(person => {
+            return {
+              ...person,
+              dinner:
+                person.name === action.name ? action.value : person.dinner,
+            };
+          }),
+        };
       } else if (action.type === 'guest-name') {
         return {
           ...state,
@@ -308,16 +327,70 @@ function EnterDetails({ group, onSubmit }) {
           ...state,
           groupEmail: action.value,
         };
+      } else if (action.type === 'validate') {
+        console.log('validate');
+
+        const vaccinationErrors = state.people
+          .map(person => {
+            if (
+              person.attending === 'attending' &&
+              person.vaccinated === false
+            ) {
+              return `vaccinated-${person.name}`;
+            }
+          })
+          .concat(
+            state.guests.map(guest => {
+              if (
+                guest.attending === 'attending' &&
+                guest.vaccinated === false
+              ) {
+                return `vaccinated-${guest.guestIndex}`;
+              }
+            })
+          );
+
+        const dinnerErrors = state.people
+          .map(person => {
+            if (person.attending === 'attending' && person.dinner === 'none') {
+              return `dinner-${person.name}`;
+            }
+          })
+          .concat(
+            state.guests.map(guest => {
+              if (guest.attending === 'attending' && guest.dinner === 'none') {
+                return `dinner-${guest.guestIndex}`;
+              }
+            })
+          );
+
+        const emailError =
+          state.groupEmail === null || state.groupEmail.trim() === ''
+            ? 'email'
+            : null;
+
+        const errors = vaccinationErrors
+          .concat(dinnerErrors)
+          .concat([emailError])
+          .filter(Boolean);
+
+        return {
+          ...state,
+          errors: errors.length === 0 ? false : errors,
+        };
       } else {
         throw new Error('unexpected action', action.type);
       }
     },
     {
       groupEmail: null,
+      errors: null,
       people: group.names.map(name => {
         return {
           name,
-          attending: false,
+          attending: 'notattending',
+          vaccinated: false,
+          dinner: 'none',
         };
       }),
       guests:
@@ -327,32 +400,49 @@ function EnterDetails({ group, onSubmit }) {
               return {
                 guestIndex,
                 name: null,
-                attending: false,
+                attending: 'notattending',
+                vaccinated: false,
+                dinner: 'none',
               };
             }),
     }
   );
 
-  console.log('state', JSON.stringify(state));
-
   function handleSubmit(event) {
     event.preventDefault();
+    dispatch({ type: 'validate' });
+  }
+
+  useEffect(() => {
+    if (state.errors !== false) {
+      return;
+    }
 
     // These are entered into the spreadsheet with columns matching key
     const spreadSheetData = state.people
       .map(person => ({
         name: person.name,
         groupEmail: state.groupEmail,
-        attending: person.attending ? 'yes' : 'no',
+        attending: person.attending === 'attending' ? 'yes' : 'no',
+
+        ...(person.attending === 'attending'
+          ? {
+              dinner: person.dinner,
+              vaccinated: person.vaccinated ? 'yes' : 'no',
+            }
+          : null),
       }))
       .concat(
         state.guests.map(guest => ({
           name: guest.name,
           groupEmail: state.groupEmail,
-          attending: guest.attending ? 'yes' : 'no',
+          attending: guest.attending === 'attending' ? 'yes' : 'no',
+          dinner: guest.dinner,
           guestOf: state.people[0].name,
         }))
       );
+
+    // console.log('submitting', JSON.stringify(spreadSheetData, null, 2));
 
     fetch(URL, {
       method: 'POST',
@@ -364,81 +454,209 @@ function EnterDetails({ group, onSubmit }) {
     });
 
     onSubmit();
-  }
+  }, [state.errors]);
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <h3>Enter an email we can use to reach your group</h3>
-          <input
-            type="email"
-            onBlur={e => {
-              dispatch({
-                type: 'group-email',
-                value: e.target.value,
-              });
-            }}
-          />
-        </div>
-        {state.people.map(person => {
-          return (
-            <div key={person.name}>
-              <p>{person.name}</p>
-              <label>
-                Attending
+    <div className="section force-transparent">
+      <div
+        className="section-container narrow-column force-transparent"
+        style={{
+          paddingTop: 0,
+        }}
+      >
+        <form onSubmit={handleSubmit}>
+          {state.people.map(person => {
+            return (
+              <div key={person.name} style={styles.personSection}>
+                <h4 style={styles.nameHeader}>{person.name}</h4>
+                <div style={styles.selectionWrapper}>
+                  <label>
+                    <div className="accent caps-subheader">Response</div>
+
+                    <select
+                      style={styles.selectInput}
+                      value={person.attending}
+                      onChange={e => {
+                        dispatch({
+                          type: 'attending',
+                          name: person.name,
+                          value: e.target.value,
+                        });
+                      }}
+                    >
+                      <option value="attending">Will Attend</option>
+                      <option value="notattending">Regretfully Declines</option>
+                    </select>
+                  </label>
+                </div>
+                <SwitchTransition>
+                  <CSSTransition
+                    key={`${person.name}-${person.attending}`}
+                    addEndListener={(node, done) =>
+                      node.addEventListener('transitionend', done, false)
+                    }
+                    classNames="fade-fast"
+                  >
+                    {person.attending === 'attending' ? (
+                      <div>
+                        <div style={styles.selectionWrapper}>
+                          <label>
+                            <div className="accent caps-subheader">
+                              Dinner Selection
+                            </div>
+
+                            <select
+                              style={styles.selectInput}
+                              value={person.dinner}
+                              onChange={e => {
+                                dispatch({
+                                  type: 'dinner',
+                                  name: person.name,
+                                  value: e.target.value,
+                                });
+                              }}
+                            >
+                              <option value="none">Select a meal</option>
+                              <option value="beef">Beef</option>
+                              <option value="chicken">Chicken</option>
+                              <option value="veggie">Vegetarian</option>
+                            </select>
+                          </label>
+
+                          {(state.errors || []).includes(
+                            `dinner-${person.name}`
+                          ) ? (
+                            <div>
+                              <span style={styles.error}>*required</span>
+                            </div>
+                          ) : null}
+                        </div>
+
+                        <div
+                          style={{
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <input
+                            id={`${person.name} vax`}
+                            style={{
+                              marginTop: '.2em',
+                            }}
+                            type="checkbox"
+                            checked={person.vaccinated}
+                            onChange={e => {
+                              dispatch({
+                                type: 'person-vaccinated',
+                                name: person.name,
+                                value: e.target.checked,
+                              });
+                            }}
+                          />
+                          <label
+                            htmlFor={`${person.name} vax`}
+                            style={{
+                              textAlign: 'left',
+                              marginLeft: '.5em',
+                            }}
+                          >
+                            {person.name} will be fully vaccinated as{' '}
+                            <a href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html">
+                              defined by the CDC
+                            </a>{' '}
+                            before 8.28.21. I understand that this is a
+                            requirement for attending.
+                          </label>
+                        </div>
+                        {(state.errors || []).includes(
+                          `vaccinated-${person.name}`
+                        ) ? (
+                          <span style={styles.error}>*required</span>
+                        ) : null}
+                      </div>
+                    ) : (
+                      <div />
+                    )}
+                  </CSSTransition>
+                </SwitchTransition>
+              </div>
+            );
+          })}
+
+          {state.guests.map(guest => {
+            return (
+              <div key={guest.guestIndex}>
                 <input
-                  type="checkbox"
-                  checked={person.attending}
+                  type="text"
+                  value={guest.name || ''}
+                  placeholder="Guest Name"
                   onChange={e => {
                     dispatch({
-                      type: 'attending',
-                      name: person.name,
-                      value: e.target.checked,
+                      type: 'guest-name',
+                      guestIndex: guest.guestIndex,
+                      name: e.target.value,
                     });
                   }}
                 />
-              </label>
-            </div>
-          );
-        })}
-
-        {state.guests.map(guest => {
-          return (
-            <div key={guest.guestIndex}>
+                <label>
+                  Attending
+                  <input
+                    type="checkbox"
+                    checked={guest.attending}
+                    onChange={e => {
+                      dispatch({
+                        type: 'guest-attending',
+                        guestIndex: guest.guestIndex,
+                        value: e.target.checked,
+                      });
+                    }}
+                  />
+                </label>
+              </div>
+            );
+          })}
+          <div style={styles.personSection}>
+            <h4 style={styles.nameHeader}>Contact Information</h4>
+            <p>
+              Please provide an email address for your party. We will send any
+              wedding announcements or health and safety updates to this
+              address.
+            </p>
+            <div style={styles.selectionWrapper}>
               <input
-                type="text"
-                value={guest.name || ''}
-                placeholder="Guest Name"
+                style={styles.input}
+                type="email"
+                placeholder="email address"
+                value={state.groupEmail == null ? '' : state.groupEmail}
                 onChange={e => {
                   dispatch({
-                    type: 'guest-name',
-                    guestIndex: guest.guestIndex,
-                    name: e.target.value,
+                    type: 'group-email',
+                    value: e.target.value,
                   });
                 }}
               />
-              <label>
-                Attending
-                <input
-                  type="checkbox"
-                  checked={guest.attending}
-                  onChange={e => {
-                    dispatch({
-                      type: 'guest-attending',
-                      guestIndex: guest.guestIndex,
-                      value: e.target.checked,
-                    });
-                  }}
-                />
-              </label>
+              {(state.errors || []).includes('email') ? (
+                <div>
+                  <span style={styles.error}>*required</span>
+                </div>
+              ) : null}
             </div>
-          );
-        })}
-        {}
-        <input type="submit" value="Submit" />
-      </form>
-    </>
+          </div>
+
+          {(state.errors || []).length > 0 ? (
+            <div style={{ marginBottom: '1em' }}>
+              <span style={styles.error}>
+                *Please fix the highlighted errors and then click submit again.
+              </span>
+            </div>
+          ) : null}
+          <button type="submit" className="submit-button">
+            Submit
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
 
@@ -467,11 +685,32 @@ function RSVPSubmittedSuccessfully() {
 }
 
 const styles = {
+  selectionWrapper: {
+    marginBottom: '1em',
+  },
   input: {
     padding: '10px 20px 5px',
     boxShadow: '0px 2px 10px #aaa',
     border: '1px solid #eaeaea',
-    marginBottom: '30px',
+    marginBottom: '10px',
+  },
+  selectInput: {
+    border: 'none',
+    padding: '.5em 3em .25em 1em',
+    boxShadow: '0px 2px 10px #aaa',
+    border: '1px solid #eaeaea',
+    marginBottom: '10px',
+  },
+  personSection: {
+    borderTop: '1px solid #ccc',
+    paddingTop: '2rem',
+    paddingBottom: '1rem',
+  },
+  nameHeader: {
+    marginBottom: '1rem',
+  },
+  error: {
+    color: '#BD0015',
   },
 };
 
