@@ -142,7 +142,7 @@ const GalleryPage = () => {
 
   return (
     <>
-      <SEO title="Home" />
+      <SEO title="Our Story" />
       <div className="section">
         <div className="section-container">
           <h3 className="cursive">Pandemic?!</h3>
