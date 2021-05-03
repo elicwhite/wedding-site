@@ -9,7 +9,7 @@ import { withPrivateRoute } from '../components/privateRoute';
 
 const URL =
   'https://script.google.com/macros/s/AKfycbytK-1S588_Z4M4MzV8M-nlyHKNargj6EXwtmPfIO3gZ-CpMBJo-3kEdDWj0wmZYqWhIw/exec';
-const SHOW_RSVP = false;
+const SHOW_RSVP = true;
 
 /*
 thoughts
