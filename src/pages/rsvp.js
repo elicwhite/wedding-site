@@ -20,6 +20,9 @@ thoughts
 matching lower case names. Fuzzy?
 Check if already submitted from google sheet?
 Email validation?
+
+If nobody in the group RSVPs, what should "We are so excited to celebrate with you!" say?
+  "We are sorry to miss you!"
 */
 
 function findGroup(name) {
@@ -72,8 +75,8 @@ const RSVPPage = () => {
 
 function RSVPForm() {
   const [rsvpGroup, setRsvpGroup] = useState(null);
-  const [previouslySubmitted, setPreviouslySubmitted] = useState(null);
-  const [submitted, setSubmitted] = useState(false);
+  const [previouslySubmittedData, setPreviouslySubmittedData] = useState(null);
+  const [submittedData, setSubmittedData] = useState(null);
 
   let content = null;
   let contentKey = null;
@@ -81,25 +84,26 @@ function RSVPForm() {
     contentKey = 'find-name';
     content = (
       <FindNameOnGuestList
-        onGroupFound={(group, alreadySubmitted) => {
-          setPreviouslySubmitted(alreadySubmitted);
+        onGroupFound={(group, alreadySubmittedData) => {
+          setPreviouslySubmittedData(alreadySubmittedData);
           setRsvpGroup(group);
         }}
       />
     );
-  } else if (previouslySubmitted) {
+  } else if (previouslySubmittedData) {
     contentKey = 'already-submitted';
-    content = <AlreadySubmitted />;
-  } else if (submitted) {
+    console.log('got prev data', previouslySubmittedData);
+    content = <AlreadySubmitted response={previouslySubmittedData} />;
+  } else if (submittedData) {
     contentKey = 'submitted-successfully';
-    content = <RSVPSubmittedSuccessfully />;
+    content = <RSVPSubmittedSuccessfully response={submittedData} />;
   } else {
     contentKey = 'enter-details';
     content = (
       <EnterDetails
         group={rsvpGroup}
-        onSubmit={() => {
-          setSubmitted(true);
+        onSubmit={submittedData => {
+          setSubmittedData(submittedData);
         }}
       />
     );
@@ -143,24 +147,23 @@ function FindNameOnGuestList({ onGroupFound }) {
 
     let expired = false;
 
-    function reportAlreadySubmitted(alreadySubmitted) {
+    function reportAlreadySubmitted(alreadySubmittedData) {
       if (expired) {
         return;
       }
 
       expired = true;
-      onGroupFound(group, alreadySubmitted);
+      onGroupFound(group, alreadySubmittedData);
       setFetchingStatus(false);
     }
     if (fetchingStatus === true) {
       const name = group.names[0];
 
-      fetch(
-        `${URL}?` +
-          new URLSearchParams({
-            name,
-          })
-      )
+      const params = new URLSearchParams(
+        group.names.map(name => ['name', name])
+      );
+      console.log('params', params.toString());
+      fetch(`${URL}?${params}`)
         .then(res => res.json())
         .then(result => {
           if (result.error) {
@@ -170,11 +173,10 @@ function FindNameOnGuestList({ onGroupFound }) {
               result.error
             );
             reportAlreadySubmitted(false);
-          } else if (result.alreadySubmitted == null) {
-            console.error('Failed to look up RSVP status for', name);
+          } else if (result.alreadySubmitted === false) {
             reportAlreadySubmitted(false);
           } else {
-            reportAlreadySubmitted(result.alreadySubmitted);
+            reportAlreadySubmitted(result);
           }
         });
     }
@@ -522,7 +524,7 @@ function EnterDetails({ group, onSubmit }) {
       body: JSON.stringify(spreadSheetData),
     });
 
-    onSubmit();
+    onSubmit(spreadSheetData);
   }, [state.errors]);
 
   return (
@@ -860,26 +862,79 @@ function EnterDetails({ group, onSubmit }) {
   );
 }
 
-function AlreadySubmitted() {
+function AlreadySubmitted({ response }) {
   return (
-    <>
-      <h3>RSVP Already Submitted</h3>
-      <p>
-        We already have an RSVP on file for you. If you need to change it,
-        please email us.
-      </p>
-    </>
+    <div className="section force-transparent">
+      <div className="section-container narrow-column">
+        <p>
+          You have already submitted an RSVP with the following information. If
+          you need to make changes, please{' '}
+          <a className="accent" href="mailto:hollyandeli@gmail.com">
+            email us
+          </a>
+          .
+        </p>
+        <ReadOnlyView response={response} />
+      </div>
+    </div>
   );
 }
 
-function RSVPSubmittedSuccessfully() {
+function RSVPSubmittedSuccessfully({ response }) {
+  const anyoneAttending = response.find(person => person.attending === 'yes');
+  const message = anyoneAttending
+    ? 'We are so excited to celebrate with you!'
+    : `We're sorry you can't attend, you will be missed!`;
+
+  return (
+    <div className="section force-transparent">
+      <div className="section-container narrow-column">
+        <p>Success! Thank you for submitting an RSVP. {message}</p>
+        <ReadOnlyView response={response} />
+      </div>
+    </div>
+  );
+}
+
+function ReadOnlyView({ response }) {
   return (
     <>
-      <h3>Success</h3>
-      <p>
-        Thank you for RSVPing. Email us if you'd like to make any modifications
-        to your RSVP.
-      </p>
+      {response.map(person => {
+        return (
+          <div style={styles.personSection}>
+            <h4 style={styles.nameHeader}>{person.name}</h4>
+
+            <div className="accent caps-subheader">Response</div>
+            <p>
+              {person.attending === 'yes'
+                ? 'Will Attend'
+                : 'Regretfully Declines'}
+            </p>
+
+            {person.attending === 'yes' ? (
+              <>
+                <div className="accent caps-subheader">Dinner Selection</div>
+                <p>
+                  {person.dinner === 'beef'
+                    ? 'Beef'
+                    : person.dinner === 'chicken'
+                    ? 'Chicken'
+                    : person.dinner === 'veggie'
+                    ? 'Vegetarian'
+                    : 'Vegetarian'}
+                </p>
+              </>
+            ) : null}
+          </div>
+        );
+      })}
+
+      <div style={styles.personSection}>
+        <h4 style={styles.nameHeader}>Contact Information</h4>
+
+        <div className="accent caps-subheader">Email Address</div>
+        <p>{response[0].groupEmail}</p>
+      </div>
     </>
   );
 }
