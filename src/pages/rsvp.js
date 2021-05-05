@@ -20,9 +20,6 @@ thoughts
 matching lower case names. Fuzzy?
 Check if already submitted from google sheet?
 Email validation?
-
-If nobody in the group RSVPs, what should "We are so excited to celebrate with you!" say?
-  "We are sorry to miss you!"
 */
 
 function findGroup(name) {
@@ -899,9 +896,17 @@ function RSVPSubmittedSuccessfully({ response }) {
 function ReadOnlyView({ response }) {
   return (
     <>
-      {response.map(person => {
+      {response.map((person, index) => {
+        if (
+          person.guestOf != null &&
+          person.guestOf.length > 0 &&
+          person.attending === 'no'
+        ) {
+          return null;
+        }
+
         return (
-          <div style={styles.personSection}>
+          <div style={styles.personSection} key={index}>
             <h4 style={styles.nameHeader}>{person.name}</h4>
 
             <div className="accent caps-subheader">Response</div>
