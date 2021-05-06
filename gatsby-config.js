@@ -42,6 +42,13 @@ module.exports = {
         path: `${__dirname}/src/images/howwemet`,
       },
     },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `vaccinated`,
+        path: `${__dirname}/src/images/vaccinated`,
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {

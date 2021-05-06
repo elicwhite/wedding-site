@@ -47,6 +47,18 @@ function Links({ onClick = () => {} }) {
           style={styles.link}
           activeStyle={styles.currentLink}
           partiallyActive={true}
+          to="/safety"
+          onClick={onClick}
+        >
+          Health &amp; Safety
+        </Link>
+      </li>
+      <li style={styles.listItem}>
+        <Link
+          className="link"
+          style={styles.link}
+          activeStyle={styles.currentLink}
+          partiallyActive={true}
           to="/travel"
           onClick={onClick}
         >

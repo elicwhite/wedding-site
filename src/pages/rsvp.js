@@ -15,11 +15,11 @@ const URL =
 const SHOW_RSVP = true;
 
 /*
-thoughts
-
 matching lower case names. Fuzzy?
 Check if already submitted from google sheet?
 Email validation?
+
+test on mobile
 */
 
 function findGroup(name) {
@@ -647,7 +647,12 @@ function EnterDetails({ group, onSubmit }) {
                         {(state.errors || []).includes(
                           `vaccinated-${person.name}`
                         ) ? (
-                          <span style={styles.error}>*required</span>
+                          <span style={styles.error}>
+                            *required. All guests must be fully vaccinated in
+                            order to attend. If you are unable to get
+                            vaccinated, please contact us or select the
+                            regretfully declines option.
+                          </span>
                         ) : null}
                       </div>
                     ) : (
@@ -804,7 +809,12 @@ function EnterDetails({ group, onSubmit }) {
                         {(state.errors || []).includes(
                           `vaccinated-${guest.guestIndex}`
                         ) ? (
-                          <span style={styles.error}>*required</span>
+                          <span style={styles.error}>
+                            *required. All guests must be fully vaccinated in
+                            order to attend. If you are unable to get
+                            vaccinated, please contact us or select the
+                            regretfully declines option.
+                          </span>
                         ) : null}
                       </div>
                     ) : (
@@ -886,7 +896,13 @@ function RSVPSubmittedSuccessfully({ response }) {
   return (
     <div className="section force-transparent">
       <div className="section-container narrow-column">
-        <p>Success! Thank you for submitting an RSVP. {message}</p>
+        <p>
+          Success! Thank you for submitting an RSVP. {message} If you need to
+          make changes, please{' '}
+          <a className="accent" href="mailto:hollyandeli@gmail.com">
+            email us
+          </a>
+        </p>
         <ReadOnlyView response={response} />
       </div>
     </div>

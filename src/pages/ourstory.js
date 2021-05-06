@@ -107,6 +107,16 @@ const GalleryPage = () => {
           }
         }
       }
+
+      vaccinated: allFile(
+        filter: { sourceInstanceName: { eq: "vaccinated" } }
+      ) {
+        edges {
+          node {
+            ...PhotoImage
+          }
+        }
+      }
     }
   `);
 
@@ -120,6 +130,12 @@ const GalleryPage = () => {
   const [howwemetPreviewPhotos, howwemetFullscreenPhotos] = getPhotos(
     data2.howwemet
   );
+
+  const [vaccinatedPreviewPhotos, vaccinatedFullscreenPhotos] = getPhotos(
+    data2.vaccinated
+  );
+
+  console.log(vaccinatedPreviewPhotos);
 
   const [currentImage, setCurrentImage] = useState(0);
   const [fullscreenPhotos, setFullscreenPhotos] = useState(
@@ -143,6 +159,29 @@ const GalleryPage = () => {
   return (
     <>
       <SEO title="Our Story" />
+      <div className="section">
+        <div className="section-container">
+          <h3 className="cursive">We're Vaccinated!</h3>
+          <div className="caps-subheader accent">May 2021</div>
+          <p>
+            Wow, what a year. Thanks to the scientists that have been hard at
+            work creating a vaccine — we are so excited that we will be able to
+            have a safe celebration with all of you in person!
+          </p>
+          <p>
+            We’re happily showing off our CDC cards and hope you’re already
+            fully vaccinated or are on your way!
+          </p>
+
+          <Gallery
+            photos={vaccinatedFullscreenPhotos}
+            renderImage={GalleryImage}
+            onClick={openLightbox.bind(null, vaccinatedFullscreenPhotos)}
+            margin={MARGIN}
+          />
+        </div>
+      </div>
+
       <div className="section">
         <div className="section-container">
           <h3 className="cursive">Pandemic?!</h3>
