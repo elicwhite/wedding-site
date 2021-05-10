@@ -34,6 +34,7 @@ const Invitation = () => {
         href={data.invitation.childImageSharp.fullscreen.src}
         className="shadow-frame"
         target="_blank"
+        rel="noopener noreferrer"
         style={{
           display: 'block',
           marginBottom: 0,
@@ -58,13 +59,19 @@ const WeddingPage = () => {
             style={{
               width: '50%',
             }}
+            alt="Hand drawing of Blanco, our wedding venue."
           />
           <p>
             Ceremony, cocktail hour, and reception will all be held at Blanco
             Urban Venue.
           </p>
           <p>
-            <a href="https://goo.gl/maps/5Aw9RPZbZWeKLURp7" className="accent">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              href="https://goo.gl/maps/5Aw9RPZbZWeKLURp7"
+              className="accent"
+            >
               12 N San Pedro St, San Jose, CA 95110
             </a>
           </p>

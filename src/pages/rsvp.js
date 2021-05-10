@@ -6,6 +6,8 @@ import RSVP_GROUP_DATA from './rsvp_data.json';
 import useInput from '../hooks/useInput';
 import Spinner from '../components/spinner';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
+import Lottie from 'react-lottie';
+import animationData from './lf30_editor_6vOhkS.json';
 
 import { withPrivateRoute } from '../components/privateRoute';
 
@@ -87,7 +89,6 @@ function RSVPForm() {
     );
   } else if (previouslySubmittedData) {
     contentKey = 'already-submitted';
-    console.log('got prev data', previouslySubmittedData);
     content = <AlreadySubmitted response={previouslySubmittedData} />;
   } else if (submittedData) {
     contentKey = 'submitted-successfully';
@@ -134,6 +135,7 @@ function FindNameOnGuestList({ onGroupFound }) {
   });
   const [group, setGroup] = useState(null);
   const [fetchingStatus, setFetchingStatus] = useState(null);
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     if (!group) {
@@ -157,7 +159,6 @@ function FindNameOnGuestList({ onGroupFound }) {
       const params = new URLSearchParams(
         group.names.map(name => ['name', name])
       );
-      console.log('params', params.toString());
       fetch(`${URL}?${params}`)
         .then(res => res.json())
         .then(result => {
@@ -188,6 +189,12 @@ function FindNameOnGuestList({ onGroupFound }) {
     };
   }, [fetchingStatus, group, onGroupFound]);
 
+  useEffect(() => {
+    if (showError) {
+      setShowError(false);
+    }
+  }, [name]);
+
   const handleSubmit = event => {
     event.preventDefault();
 
@@ -195,6 +202,7 @@ function FindNameOnGuestList({ onGroupFound }) {
 
     if (group == null) {
       setGroup(false);
+      setShowError(true);
     } else {
       setGroup(group);
       setFetchingStatus(true);
@@ -217,17 +225,30 @@ function FindNameOnGuestList({ onGroupFound }) {
             Enter any name listed on your invitation to find your information.
           </p>
           <form onSubmit={handleSubmit}>
-            {group === false ? (
-              <>
-                <h3>Name not found on the guest list</h3>
-                <p>
-                  If you this is in error{' '}
-                  <a href="mailto:hollyandeli@gmail.com">email us.</a>
-                </p>
-              </>
-            ) : null}
-            <div>{nameInput}</div>
-
+            <div
+              style={{
+                marginBottom: '1em',
+              }}
+            >
+              <div>{nameInput}</div>
+              {group === false && showError ? (
+                <div>
+                  <span style={styles.error}>
+                    We're sorry, "{name}" was not found. Please make sure you've
+                    entered your full name as it is written on your invitation.
+                    If you need help, please{' '}
+                    <a
+                      className="accent"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      href="mailto:hollyandeli@gmail.com"
+                    >
+                      email us.
+                    </a>
+                  </span>
+                </div>
+              ) : null}
+            </div>
             <SwitchTransition>
               <CSSTransition
                 key={fetchingStatus ? 'checking' : 'not checking'}
@@ -351,8 +372,6 @@ function EnterDetails({ group, onSubmit }) {
           groupEmail: action.value,
         };
       } else if (action.type === 'validate') {
-        console.log('validate');
-
         const attendingErrors = state.people
           .map(person => {
             if (person.attending === 'choose') {
@@ -508,8 +527,6 @@ function EnterDetails({ group, onSubmit }) {
         }))
       );
 
-    // console.log('submitting', JSON.stringify(spreadSheetData, null, 2));
-
     fetch(URL, {
       method: 'POST',
       mode: 'no-cors',
@@ -635,7 +652,10 @@ function EnterDetails({ group, onSubmit }) {
                             }}
                           >
                             {person.name} will be fully vaccinated as{' '}
-                            <a href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html">
+                            <a
+                              className="accent"
+                              href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html"
+                            >
                               defined by the CDC
                             </a>{' '}
                             before 8.28.21. I understand that this is a
@@ -797,7 +817,10 @@ function EnterDetails({ group, onSubmit }) {
                             }}
                           >
                             Guest will be fully vaccinated as{' '}
-                            <a href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html">
+                            <a
+                              className="accent"
+                              href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html"
+                            >
                               defined by the CDC
                             </a>{' '}
                             before 8.28.21. I understand that this is a
@@ -891,17 +914,52 @@ function RSVPSubmittedSuccessfully({ response }) {
     ? 'We are so excited to celebrate with you!'
     : `We're sorry you can't attend, you will be missed!`;
 
+  const [showingAnimation, setShowingAnimation] = useState(anyoneAttending);
+
   return (
     <div className="section force-transparent">
       <div className="section-container narrow-column">
-        <p>
-          Success! Thank you for submitting an RSVP. {message} If you need to
-          make changes, please{' '}
-          <a className="accent" href="mailto:hollyandeli@gmail.com">
-            email us
-          </a>
-        </p>
-        <ReadOnlyView response={response} />
+        <SwitchTransition>
+          <CSSTransition
+            key={showingAnimation ? 'animation' : 'message'}
+            addEndListener={(node, done) =>
+              node.addEventListener('transitionend', done, false)
+            }
+            classNames="fade"
+          >
+            {showingAnimation ? (
+              <Lottie
+                options={{
+                  autoplay: true,
+                  loop: false,
+                  animationData: animationData,
+                  rendererSettings: {
+                    preserveAspectRatio: 'xMidYMid slice',
+                  },
+                }}
+                height={200}
+                width={200}
+                eventListeners={[
+                  {
+                    eventName: 'complete',
+                    callback: () => setShowingAnimation(false),
+                  },
+                ]}
+              />
+            ) : (
+              <div>
+                <p>
+                  Success! Thank you for submitting an RSVP. {message} If you
+                  need to make changes, please{' '}
+                  <a className="accent" href="mailto:hollyandeli@gmail.com">
+                    email us
+                  </a>
+                </p>
+                <ReadOnlyView response={response} />
+              </div>
+            )}
+          </CSSTransition>
+        </SwitchTransition>
       </div>
     </div>
   );

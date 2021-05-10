@@ -135,8 +135,6 @@ const GalleryPage = () => {
     data2.vaccinated
   );
 
-  console.log(vaccinatedPreviewPhotos);
-
   const [currentImage, setCurrentImage] = useState(0);
   const [fullscreenPhotos, setFullscreenPhotos] = useState(
     engagement2FullscreenPhotos

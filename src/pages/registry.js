@@ -22,6 +22,8 @@ const RegistryPage = () => {
           </p>
 
           <a
+            target="_blank"
+            rel="noopener noreferrer"
             href="https://www.zola.com/registry/hollyandeli2021"
             className="submit-button"
             style={styles.viewRegistry}
