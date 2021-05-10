@@ -27,7 +27,12 @@ const SafetyPage = () => {
           </p>
           <p>
             If you have questions or concerns, please{' '}
-            <a className="accent" href="mailto:hollyandeli@gmail.com">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              className="accent"
+              href="mailto:hollyandeli@gmail.com"
+            >
               email us
             </a>
             .
@@ -38,7 +43,7 @@ const SafetyPage = () => {
         <div className="section-container">
           <h3 className="cursive">State and Local Guidelines</h3>
           <p>
-            Our wedding will be held in accordinace with all state and local
+            Our wedding will be held in accordance with all state and local
             guidelines. This is an ever changing situation - we will keep you
             updated via email and post here with any additional health and
             safety requirements for the event.

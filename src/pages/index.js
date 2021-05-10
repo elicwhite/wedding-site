@@ -28,11 +28,12 @@ const IndexPage = () => {
       <SEO title="Home" />
       <div className="section">
         <div className="section-container">
+          <h3 className="cursive">We're Getting Married!</h3>
+          <div className="caps-subheader">August 28th, 2021</div>
+
           <div className="shadow-frame">
             <Image />
           </div>
-          <h3 className="cursive">We're Getting Married!</h3>
-          <div className="caps-subheader">August 28th, 2021</div>
         </div>
       </div>
     </>

@@ -44,7 +44,12 @@ const RSVPPage = () => {
             It will greatly help with our planning to know if you are unable to
             attend. If you already know about a conflict kindly send your
             regrets via email to{' '}
-            <a className="accent" href="mailto:hollyandeli@gmail.com">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              className="accent"
+              href="mailto:hollyandeli@gmail.com"
+            >
               hollyandeli@gmail.com
             </a>
             .
@@ -198,7 +203,7 @@ function FindNameOnGuestList({ onGroupFound }) {
   const handleSubmit = event => {
     event.preventDefault();
 
-    const group = findGroup(name);
+    const group = findGroup(name.trim());
 
     if (group == null) {
       setGroup(false);
@@ -267,7 +272,12 @@ function FindNameOnGuestList({ onGroupFound }) {
         <div className="section-container narrow-column">
           <p style={{ marginBottom: '0px' }}>
             If you are unable to use the website you may{' '}
-            <a className="accent" href="mailto:hollyandeli@gmail.com">
+            <a
+              target="_blank"
+              rel="noopener noreferrer"
+              className="accent"
+              href="mailto:hollyandeli@gmail.com"
+            >
               email us
             </a>{' '}
             or give us a call.
@@ -653,6 +663,8 @@ function EnterDetails({ group, onSubmit }) {
                           >
                             {person.name} will be fully vaccinated as{' '}
                             <a
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="accent"
                               href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html"
                             >
@@ -818,6 +830,8 @@ function EnterDetails({ group, onSubmit }) {
                           >
                             Guest will be fully vaccinated as{' '}
                             <a
+                              target="_blank"
+                              rel="noopener noreferrer"
                               className="accent"
                               href="https://www.cdc.gov/coronavirus/2019-ncov/vaccines/fully-vaccinated-guidance.html"
                             >
@@ -897,7 +911,12 @@ function AlreadySubmitted({ response }) {
         <p>
           You have already submitted an RSVP with the following information. If
           you need to make changes, please{' '}
-          <a className="accent" href="mailto:hollyandeli@gmail.com">
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            className="accent"
+            href="mailto:hollyandeli@gmail.com"
+          >
             email us
           </a>
           .
@@ -951,7 +970,12 @@ function RSVPSubmittedSuccessfully({ response }) {
                 <p>
                   Success! Thank you for submitting an RSVP. {message} If you
                   need to make changes, please{' '}
-                  <a className="accent" href="mailto:hollyandeli@gmail.com">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="accent"
+                    href="mailto:hollyandeli@gmail.com"
+                  >
                     email us
                   </a>
                 </p>
