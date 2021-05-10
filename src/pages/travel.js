@@ -9,12 +9,59 @@ const TravelPage = () => {
   return (
     <>
       <SEO title="Travel" />
+      <div className="section-container narrow-column">
+        <h3 className="cursive">Hotels</h3>
+        <div className="caps-subheader accent">Reserved Room Blocks</div>
+        <p>
+          For your convenience we’ve reserved blocks of rooms at two hotels.
+          Rates are available until July 27th or until blocks sell out.
+        </p>
+        <p>If booking via phone, mention Lowe/White Wedding.</p>
+
+        <div className="place">
+          <h4>AC Hotel by Marriott San Jose</h4>
+
+          <p>
+            5 minute walk to the venue
+            <br />
+            $179/night
+          </p>
+          <p>1-800-993-4751</p>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.marriott.com/event-reservations/reservation-link.mi?id=1598551566717&amp;key=GRP&amp;app=resvlink"
+            className="submit-button link-button"
+          >
+            Book Online with Marriott
+          </a>
+        </div>
+        <div className="place">
+          <h4>Hyatt Place San Jose</h4>
+          <p>
+            9 minute walk to the venue
+            <br />
+            $129/night
+          </p>
+          <p>1-408-925-0900</p>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.hyatt.com/en-US/group-booking/SJCZJ/G-LOW2"
+            className="submit-button link-button"
+          >
+            Book Online with Hyatt
+          </a>
+        </div>
+      </div>
       <div className="section">
         <div className="section-container narrow-column">
           <h3 className="cursive">Airport</h3>
           <div className="caps-subheader accent">
-            Mineta San Jose International Airport
+            A hop, skip, and a jump away
           </div>
+          <h4>Mineta San Jose International Airport</h4>
+
           <p>
             Our venue is about 4 miles from Norman Y. Mineta San Jose
             International Airport (SJC). Rideshare from the airport is about
@@ -24,10 +71,6 @@ const TravelPage = () => {
             San Francisco International Airport (SFO) and Oakland International
             Airport (OAK) are also options but are about 35 miles away.
           </p>
-          <br />
-
-          <h3 className="cursive">Hotels</h3>
-          <ComingSoon />
         </div>
       </div>
       <div className="section">
@@ -83,14 +126,17 @@ const TravelPage = () => {
           </div>
 
           <div className="place">
-            <h4>Shop & Eat in Walkable Downtowns</h4>
+            <h4>Shop &amp; Eat in Walkable Downtowns</h4>
             <p>
               Explore some of the other cities and walkable areas including: San
               Pedro Square, Santana Row, Downtown Sunnyvale, Downtown Mountain
               View, Downtown Palo Alto, and Downtown San Carlos.
             </p>
           </div>
-
+        </div>
+      </div>
+      <div className="section">
+        <div className="section-container narrow-column">
           <h3 className="cursive">Eat</h3>
           <div className="caps-subheader accent">Our Favorite Eats</div>
           <div className="place">

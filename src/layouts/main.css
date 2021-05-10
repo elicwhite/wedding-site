@@ -167,3 +167,8 @@ select {
 input[type='checkbox'].error {
   outline: 1px solid #bd0015;
 }
+
+.link-button {
+  display: inline-block;
+  text-decoration: none;
+}
