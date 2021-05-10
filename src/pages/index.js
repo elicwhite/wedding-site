@@ -32,7 +32,7 @@ const IndexPage = () => {
           <div className="shadow-frame">
             <Image />
           </div>
-          <h3 className="cursive">Save Our New Date</h3>
+          <h3 className="cursive">We're Getting Married!</h3>
           <div className="caps-subheader">August 28th, 2021</div>
         </div>
       </div>
