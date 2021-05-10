@@ -1,8 +1,0 @@
-.enter-another-email {
-  color: var(--accent-color);
-  text-decoration: none;
-}
-
-.enter-another-email:hover {
-  text-decoration: underline;
-}

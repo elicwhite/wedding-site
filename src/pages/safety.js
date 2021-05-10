@@ -1,7 +1,6 @@
 import React from 'react';
 
 import SEO from '../components/seo';
-import GetUpdatesSection from '../components/getUpdatesSection';
 
 import { withPrivateRoute } from '../components/privateRoute';
 
@@ -46,7 +45,6 @@ const SafetyPage = () => {
           </p>
         </div>
       </div>
-      <GetUpdatesSection />
     </>
   );
 };

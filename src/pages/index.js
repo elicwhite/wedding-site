@@ -3,7 +3,6 @@ import Img from 'gatsby-image';
 import { useStaticQuery, graphql } from 'gatsby';
 
 import SEO from '../components/seo';
-import GetUpdatesSection from '../components/getUpdatesSection';
 
 import { withPrivateRoute } from '../components/privateRoute';
 
@@ -36,8 +35,6 @@ const IndexPage = () => {
           <div className="caps-subheader">August 28th, 2021</div>
         </div>
       </div>
-
-      <GetUpdatesSection />
     </>
   );
 };

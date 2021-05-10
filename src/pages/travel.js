@@ -1,7 +1,6 @@
 import React from 'react';
 
 import SEO from '../components/seo';
-import GetUpdatesSection from '../components/getUpdatesSection';
 import ComingSoon from '../components/comingSoon';
 
 import { withPrivateRoute } from '../components/privateRoute';
@@ -31,7 +30,6 @@ const TravelPage = () => {
           <ComingSoon />
         </div>
       </div>
-      <GetUpdatesSection />
       <div className="section">
         <div className="section-container narrow-column">
           <h3 className="cursive">Explore</h3>

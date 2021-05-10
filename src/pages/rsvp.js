@@ -1,7 +1,6 @@
 import React, { useState, useReducer, useEffect } from 'react';
 
 import SEO from '../components/seo';
-import GetUpdatesSection from '../components/getUpdatesSection';
 import ComingSoon from '../components/comingSoon';
 import RSVP_GROUP_DATA from './rsvp_data.json';
 import useInput from '../hooks/useInput';
@@ -65,7 +64,6 @@ const RSVPPage = () => {
     <>
       <SEO title="RSVP" />
       {content}
-      {SHOW_RSVP ? null : <GetUpdatesSection />}
     </>
   );
 };
