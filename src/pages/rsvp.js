@@ -657,6 +657,7 @@ function EnterDetails({ group, onSubmit }) {
                           <label
                             htmlFor={`${person.name} vax`}
                             style={{
+                              flex: 2,
                               textAlign: 'left',
                               marginLeft: '.5em',
                             }}
@@ -824,6 +825,7 @@ function EnterDetails({ group, onSubmit }) {
                           <label
                             htmlFor={`${guest.guestIndex} vax`}
                             style={{
+                              flex: 2,
                               textAlign: 'left',
                               marginLeft: '.5em',
                             }}
