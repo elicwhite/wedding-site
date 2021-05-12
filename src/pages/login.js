@@ -89,8 +89,8 @@ const LoginPage = () => {
                           'calc(24px * var(--font-size-multiplier))',
                       }}
                     >
-                      Please enter the password from your Save the Date postcard
-                      for access to wedding details.
+                      Please enter the password from your invitation for access
+                      to wedding details.
                     </p>
                     <form onSubmit={handleSubmit}>
                       <div>
