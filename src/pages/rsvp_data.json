@@ -72,7 +72,8 @@
     "names": ["Leah White"]
   },
   {
-    "names": ["Victoria Harrington", "Guest"]
+    "names": ["Victoria Harrington"],
+    "guests": 1
   },
   {
     "names": ["Victoria Yuen-Ruan", "Roby Behrens"]
@@ -81,7 +82,8 @@
     "names": ["Suzanne Amor"]
   },
   {
-    "names": ["Amanda Purcell", "Guest"]
+    "names": ["Amanda Purcell"],
+    "guests": 1
   },
   {
     "names": ["Stephanie Friend"]
