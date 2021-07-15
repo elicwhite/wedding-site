@@ -78,6 +78,44 @@ const WeddingPage = () => {
         </div>
       </div>
       <div className="section">
+        <div className="section-container narrow-column">
+          <h3 className="cursive">Details</h3>
+          <div className="caps-subheader accent">On the Day</div>
+
+          <div className="place">
+            <h4>Dress Code</h4>
+            <p>
+              Cocktail Attire
+              <br />
+              <a
+                href="https://www.brides.com/cocktail-attire-wedding-4844364"
+                target="blank"
+                className="accent"
+              >
+                read the guide
+              </a>
+            </p>
+          </div>
+
+          <div className="place">
+            <h4>Parking</h4>
+            <p>
+              Parking is available in a parking structure right next to Blanco
+              for a $10 flat rate per day. If you leave after 1:00am, parking is
+              free.
+              <br />
+              <a
+                href="https://goo.gl/maps/Fn5qQ6cWJNyzeTtK6"
+                target="blank"
+                className="accent"
+              >
+                get directions
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div className="section">
         <div className="section-container">
           <Invitation />
         </div>
