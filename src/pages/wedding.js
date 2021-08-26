@@ -120,16 +120,6 @@ const WeddingPage = () => {
           <Invitation />
         </div>
       </div>
-      <div className="section">
-        <div className="section-container">
-          <h3 className="cursive">Wedding</h3>
-          <div className="caps-subheader accent">Coming Soon</div>
-          <p>
-            More details on when doors open and a timeline of events will be
-            available at a later date.
-          </p>
-        </div>
-      </div>
     </>
   );
 };
